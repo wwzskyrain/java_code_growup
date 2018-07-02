@@ -1,6 +1,12 @@
-${user}<br>
-${latestProduct.url}<br>
-${latestProduct.name}
+${product.url}<br>
+${product.name}
+
+
+<#if product.hotProduct>
+    热卖商品
+<#else>
+    非热卖商品
+</#if>
 
 <#assign protect = true>
 ${protect?string("yes","no")}

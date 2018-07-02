@@ -119,6 +119,9 @@ class PrioritizedTaskConsumer implements Runnable {
         print("Finished PrioritizedTaskConsumer");
     }
 }
+//  通过读api可知PriorityBlockingQueue调用Comparable接口来判断优先级的，如果队列中的元素没有实现该接口，则报CastClassException。
+//  该Demo是用一个生产者线程来构造任务并向"优先级阻塞队列"添加任务，而消费者线程从"优先级阻塞队列"中获取take任务并执行任务。当执行到EndSentinel任务后，EndSentinel任务回关闭程序。
+//  这个Demo的结构同DelayQueueDemo。这里EndSentinel必须保证是最后一个被取出队列，所以他的优先级必须最小（这里为-1）。
 
 public class PriorityBlockingQueueDemo {
     public static void main(String[] args) throws Exception {

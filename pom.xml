@@ -26,6 +26,11 @@
         <module>mocktest</module>
         <module>log4j-study</module>
         <module>log4j-study</module>
+        <module>websoket</module>
+        <module>redis-demo</module>
+        <module>spring-content-demo</module>
+        <module>leetcode</module>
+        <module>ignite-study</module>
     </modules>
 
 

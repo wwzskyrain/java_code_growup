@@ -31,11 +31,11 @@ public class TemplateTest {
 
         Map<String, Object> root = new HashMap<>();
 
-        root.put("user", "Big Joe");
+        Product product = new Product("product/green/mouse.html","green mouse");
 
-        Product latest = new Product("product/green/mouse.html","green mouse");
+        product.setHotProduct(true);
 
-        root.put("latestProduct", latest);
+        root.put("product", product);
 
         root.put("indexOf",new IndexOfMethod());
 

@@ -1,6 +1,8 @@
 package concurrency;//: concurrency/Joining.java
 // Understanding join().
 
+import java.util.Date;
+
 import static net.mindview.util.Print.*;
 
 class Sleeper extends Thread {
@@ -17,6 +19,7 @@ class Sleeper extends Thread {
             System.out.println(getName() + "sleep!!!");
             sleep(duration);
         } catch (InterruptedException e) {
+            System.out.printf("%s was interrupted. is Interrupted(): %b at time:%d\n", getName(), isInterrupted(), new Date().getTime());
             print(getName() + " was interrupted. " +
                     "isInterrupted(): " + isInterrupted());
             return;
@@ -55,7 +58,10 @@ public class Joining {
                 doc = new Joiner("Doc", grumpy);
 
         grumpy.interrupt();
-
+        System.out.printf("grumpy thread isInterrupted():%b at:%d \n ", grumpy.isInterrupted(), new Date().getTime());
+//  wwz：从发出中断指令（调用grumpy.interrupt方法），到线程被中断并抛出InterruptedException并被捕获（指到catch代码块），是很迅速的，这之间
+//  根本来不及检查线程grumpy的中断状态。（或许向可中断线程发出中断指令，根本就不会设置中断状态，从interrupt方法的api可以看出来：If none of the previous conditions hold then this thread's interrupt
+//  status will be set.）
     }
 } /* Output:
 Grumpy was interrupted. isInterrupted(): false

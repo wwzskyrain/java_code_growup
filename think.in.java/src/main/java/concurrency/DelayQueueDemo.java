@@ -7,6 +7,7 @@ import static java.util.concurrent.TimeUnit.*;
 import static net.mindview.util.Print.*;
 
 class DelayedTask implements Runnable, Delayed {
+
     private static int counter = 0;
     private final int id = counter++;
     private final int delta;
@@ -34,7 +35,7 @@ class DelayedTask implements Runnable, Delayed {
     }
 
     public void run() {
-        printnb(this + " ");
+        printnb(this + " at thread:"+Thread.currentThread().getName()+"\n");
     }
 
     public String toString() {
@@ -60,8 +61,12 @@ class DelayedTask implements Runnable, Delayed {
                 printnb(pt.summary() + " ");
             }
             print();
-            print(this + " Calling shutdownNow()");
-            exec.shutdownNow();
+//            print(this + " Calling shutdownNow()");
+//            exec.shutdownNow();//奇怪的很，调用shutdownNow就可以正常关闭程序。
+//          而调用Thread.interrupt就不能正常关闭程序，线程pool-1-thread-1在 java.util.concurrent.SynchronousQueue$TransferStack@1147465f上TIMED_WAITING
+//          因为这里只有一个消费线程，所以完全可以是用Thread.interrupt。
+            System.out.printf("thread[%s] invoke interrupt.\n",Thread.currentThread().getName());
+            Thread.currentThread().interrupt();   //消费线程也确实正常执行完了，但是就是线程不结束。
         }
     }
 }
@@ -75,14 +80,18 @@ class DelayedTaskConsumer implements Runnable {
 
     public void run() {
         try {
-            while (!Thread.interrupted())
-            {
-                q.take().run(); // Run task with the current thread
-                TimeUnit.MILLISECONDS.sleep(500);
+            while (!Thread.interrupted()) {
+
+                System.out.printf("thread[%s] will take a delay_task\n",Thread.currentThread().getName());
+                DelayedTask delayedTask = q.take(); // Run task with the current thread
+//                TimeUnit.MILLISECONDS.sleep(500);
+                System.out.printf("thread[%s] take a delay_task[%s] and run it:",Thread.currentThread().getName(),delayedTask);
+                delayedTask.run();
             }
 
         } catch (InterruptedException e) {
             // Acceptable way to exit
+            System.out.printf("catch interrupt thread[%s]\n",Thread.currentThread().getName());
         }
         print("Finished DelayedTaskConsumer");
     }
@@ -101,7 +110,9 @@ public class DelayQueueDemo {
         for (int i = 0; i < 20; i++)
             queue.put(new DelayedTask(rand.nextInt(5000)));
         // Set the stopping point
-        queue.add(new DelayedTask.EndSentinel(5000, exec));
+        queue.add(new DelayedTask.EndSentinel(6000, exec));
+
+        System.out.printf("thread[%s] is over \n",Thread.currentThread().getName());
 
     }
 } /* Output:
