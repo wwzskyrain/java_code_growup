@@ -22,7 +22,7 @@ import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.cache.query.SqlFieldsQuery;
 import org.apache.ignite.configuration.CacheConfiguration;
-import org.apache.ignite.examples.ExampleNodeStartup;
+import examples.ExampleNodeStartup;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class SqlDdlExample {
                     "CREATE TABLE person (id LONG, name VARCHAR, city_id LONG, PRIMARY KEY (id, city_id)) " +
                     "WITH \"backups=1, affinity_key=city_id\"")).getAll();
 
-                // Create an index.
+                // Create an index.-- 为什么还要getAll呢？
                 cache.query(new SqlFieldsQuery("CREATE INDEX on Person (city_id)")).getAll();
 
                 print("Created database objects.");

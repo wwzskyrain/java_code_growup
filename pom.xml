@@ -31,6 +31,8 @@
         <module>spring-content-demo</module>
         <module>leetcode</module>
         <module>ignite-study</module>
+        <module>hytrix</module>
+        <module>hystrix</module>
     </modules>
 
 

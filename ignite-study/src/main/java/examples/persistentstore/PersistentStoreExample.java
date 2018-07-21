@@ -26,8 +26,8 @@ import org.apache.ignite.cache.CacheWriteSynchronizationMode;
 import org.apache.ignite.cache.query.QueryCursor;
 import org.apache.ignite.cache.query.SqlFieldsQuery;
 import org.apache.ignite.configuration.CacheConfiguration;
-import org.apache.ignite.examples.datagrid.CacheQueryExample;
-import org.apache.ignite.examples.model.Organization;
+import examples.datagrid.CacheQueryExample;
+import examples.model.Organization;
 
 import java.util.List;
 
@@ -48,7 +48,9 @@ import java.util.List;
  * data that is in the persistence only.
  */
 public class PersistentStoreExample {
-    /** Organizations cache name. */
+    /**
+     * Organizations cache name.
+     */
     private static final String ORG_CACHE = CacheQueryExample.class.getSimpleName() + "Organizations";
 
     /** */
@@ -92,8 +94,8 @@ public class PersistentStoreExample {
 
             // Run SQL without explicitly calling to loadCache().
             QueryCursor<List<?>> cur = cache.query(
-                new SqlFieldsQuery("select id, name from Organization where name like ?")
-                    .setArgs("organization-54321"));
+                    new SqlFieldsQuery("select id, name from Organization where name like ?")
+                            .setArgs("organization-54321"));
 
             System.out.println("SQL Result: " + cur.getAll());
 

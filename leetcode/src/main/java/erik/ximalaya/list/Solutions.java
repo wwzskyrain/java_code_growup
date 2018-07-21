@@ -66,7 +66,7 @@ public class Solutions {
 
     //    33. Search in Rotated Sorted Array
     public int search(int[] nums, int target) {
-//  关键是找到target所在的那一办，而且这个查住不能大于O(logn)
+//  关键是找到target所在的那一半，而且这个查住不能大于O(logn)
         if (nums.length == 0) {
             return -1;
         }
@@ -148,7 +148,7 @@ public class Solutions {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 //       基础解法
-        int total = nums1.length + nums2.length;
+        int totalLength = nums1.length + nums2.length;
 
         int counter = 0;
         double sum = 0;
@@ -173,12 +173,12 @@ public class Solutions {
 
 //          这一段代码是找出第counter个最小值
 
-            if (counter == total / 2) {
+            if (counter == totalLength / 2) {
                 sum += min;
             }
-            if (counter == total / 2 + 1) {
+            if (counter == totalLength / 2 + 1) {
 
-                if(total%2==1){
+                if(totalLength%2==1){
                     return min;
                 }
                 sum += min;

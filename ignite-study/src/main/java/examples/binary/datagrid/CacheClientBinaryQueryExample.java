@@ -27,7 +27,7 @@ import org.apache.ignite.cache.query.SqlFieldsQuery;
 import org.apache.ignite.cache.query.SqlQuery;
 import org.apache.ignite.cache.query.TextQuery;
 import org.apache.ignite.configuration.CacheConfiguration;
-import org.apache.ignite.examples.model.*;
+import examples.model.*;
 
 import javax.cache.Cache;
 import java.sql.Timestamp;
@@ -42,7 +42,7 @@ import java.util.List;
  * Remote nodes should always be started with the following command:
  * {@code 'ignite.{sh|bat} examples/config/example-ignite.xml'}
  * <p>
- * Alternatively you can run {@link org.apache.ignite.examples.ExampleNodeStartup} in another JVM which will
+ * Alternatively you can run {@link examples.ExampleNodeStartup} in another JVM which will
  * start a node with {@code examples/config/example-ignite.xml} configuration.
  */
 public class CacheClientBinaryQueryExample {
@@ -64,12 +64,12 @@ public class CacheClientBinaryQueryExample {
             System.out.println();
             System.out.println(">>> Binary objects cache query example started.");
 
-            CacheConfiguration<Integer, Organization> orgCacheCfg = new CacheConfiguration<>();
+            CacheConfiguration<Integer, Organization> organizationCacheConfiguration = new CacheConfiguration<>();
 
-            orgCacheCfg.setCacheMode(CacheMode.PARTITIONED);
-            orgCacheCfg.setName(ORGANIZATION_CACHE_NAME);
+            organizationCacheConfiguration.setCacheMode(CacheMode.PARTITIONED);
+            organizationCacheConfiguration.setName(ORGANIZATION_CACHE_NAME);
 
-            orgCacheCfg.setQueryEntities(Arrays.asList(createOrganizationQueryEntity()));
+            organizationCacheConfiguration.setQueryEntities(Arrays.asList(createOrganizationQueryEntity()));
 
             CacheConfiguration<EmployeeKey, Employee> employeeCacheCfg = new CacheConfiguration<>();
 
@@ -80,7 +80,7 @@ public class CacheClientBinaryQueryExample {
 
             employeeCacheCfg.setKeyConfiguration(new CacheKeyConfiguration(EmployeeKey.class));
 
-            try (IgniteCache<Integer, Organization> orgCache = ignite.getOrCreateCache(orgCacheCfg);
+            try (IgniteCache<Integer, Organization> orgCache = ignite.getOrCreateCache(organizationCacheConfiguration);
                  IgniteCache<EmployeeKey, Employee> employeeCache = ignite.getOrCreateCache(employeeCacheCfg)
             ) {
                 if (ignite.cluster().forDataNodes(orgCache.getName()).nodes().isEmpty()) {
@@ -188,12 +188,12 @@ public class CacheClientBinaryQueryExample {
 
         int zip = 94109;
 
-        QueryCursor<Cache.Entry<BinaryObject, BinaryObject>> employees = cache.query(query.setArgs(zip));
+        QueryCursor<Cache.Entry<BinaryObject, BinaryObject>> employeesCursor = cache.query(query.setArgs(zip));
 
         System.out.println();
         System.out.println(">>> Employees with zip " + zip + ':');
 
-        for (Cache.Entry<BinaryObject, BinaryObject> e : employees.getAll())
+        for (Cache.Entry<BinaryObject, BinaryObject> e : employeesCursor.getAll())
             System.out.println(">>>     " + e.getValue().deserialize());
     }
 
@@ -209,13 +209,13 @@ public class CacheClientBinaryQueryExample {
 
         String organizationName = "GridGain";
 
-        QueryCursor<Cache.Entry<BinaryObject, BinaryObject>> employees =
+        QueryCursor<Cache.Entry<BinaryObject, BinaryObject>> employeesCursor =
             cache.query(qry.setArgs(organizationName));
 
         System.out.println();
         System.out.println(">>> Employees working for " + organizationName + ':');
 
-        for (Cache.Entry<BinaryObject, BinaryObject> e : employees.getAll())
+        for (Cache.Entry<BinaryObject, BinaryObject> e : employeesCursor.getAll())
             System.out.println(">>>     " + e.getValue());
     }
 

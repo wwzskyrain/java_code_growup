@@ -19,8 +19,8 @@ package examples.ml.dataset;
 
 import org.apache.ignite.Ignite;
 import org.apache.ignite.Ignition;
-import org.apache.ignite.examples.ml.dataset.model.Person;
-import org.apache.ignite.ml.dataset.DatasetFactory;
+import examples.ml.dataset.model.Person;
+import ml.dataset.DatasetFactory;
 import org.apache.ignite.ml.dataset.primitive.SimpleDataset;
 
 import java.util.Arrays;

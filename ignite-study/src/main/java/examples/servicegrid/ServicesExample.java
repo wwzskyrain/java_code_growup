@@ -20,8 +20,8 @@ package examples.servicegrid;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteServices;
 import org.apache.ignite.Ignition;
-import org.apache.ignite.examples.ExampleNodeStartup;
-import org.apache.ignite.examples.ExamplesUtils;
+import examples.ExampleNodeStartup;
+import examples.ExamplesUtils;
 import org.apache.ignite.lang.IgniteCallable;
 import org.apache.ignite.resources.ServiceResource;
 

@@ -20,8 +20,8 @@ package examples.binary.computegrid;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.binary.BinaryObject;
-import org.apache.ignite.examples.model.Address;
-import org.apache.ignite.examples.model.Employee;
+import examples.model.Address;
+import examples.model.Employee;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,10 +38,13 @@ import java.util.Collection;
  * Remote nodes should always be started with the following command:
  * {@code 'ignite.{sh|bat} examples/config/example-ignite.xml'}.
  * <p>
- * Alternatively you can run {@link org.apache.ignite.examples.ExampleNodeStartup} in another JVM which will
+ * Alternatively you can run {@link examples.ExampleNodeStartup} in another JVM which will
  * start a node with {@code examples/config/example-ignite.xml} configuration.
  */
 public class ComputeClientBinaryTaskExecutionExample {
+
+//  何谓"计算网格"compute-grid？就是多线程计算吗？就是分布式计算吗？
+
     /**
      * Executes example.
      *
@@ -94,59 +97,59 @@ public class ComputeClientBinaryTaskExecutionExample {
         Collection<Employee> employees = new ArrayList<>();
 
         employees.add(new Employee(
-            "James Wilson",
-            12500,
-            new Address("1096 Eddy Street, San Francisco, CA", 94109),
-            Arrays.asList("Human Resources", "Customer Service")
+                "James Wilson",
+                12500,
+                new Address("1096 Eddy Street, San Francisco, CA", 94109),
+                Arrays.asList("Human Resources", "Customer Service")
         ));
 
         employees.add(new Employee(
-            "Daniel Adams",
-            11000,
-            new Address("184 Fidler Drive, San Antonio, TX", 78205),
-            Arrays.asList("Development", "QA")
+                "Daniel Adams",
+                11000,
+                new Address("184 Fidler Drive, San Antonio, TX", 78205),
+                Arrays.asList("Development", "QA")
         ));
 
         employees.add(new Employee(
-            "Cristian Moss",
-            12500,
-            new Address("667 Jerry Dove Drive, Florence, SC", 29501),
-            Arrays.asList("Logistics")
+                "Cristian Moss",
+                12500,
+                new Address("667 Jerry Dove Drive, Florence, SC", 29501),
+                Arrays.asList("Logistics")
         ));
 
         employees.add(new Employee(
-            "Allison Mathis",
-            25300,
-            new Address("2702 Freedom Lane, Hornitos, CA", 95325),
-            Arrays.asList("Development")
+                "Allison Mathis",
+                25300,
+                new Address("2702 Freedom Lane, Hornitos, CA", 95325),
+                Arrays.asList("Development")
         ));
 
         employees.add(new Employee(
-            "Breana Robbin",
-            6500,
-            new Address("3960 Sundown Lane, Austin, TX", 78758),
-            Arrays.asList("Sales")
+                "Breana Robbin",
+                6500,
+                new Address("3960 Sundown Lane, Austin, TX", 78758),
+                Arrays.asList("Sales")
         ));
 
         employees.add(new Employee(
-            "Philip Horsley",
-            19800,
-            new Address("2803 Elsie Drive, Sioux Falls, SD", 57104),
-            Arrays.asList("Sales")
+                "Philip Horsley",
+                19800,
+                new Address("2803 Elsie Drive, Sioux Falls, SD", 57104),
+                Arrays.asList("Sales")
         ));
 
         employees.add(new Employee(
-            "Brian Peters",
-            10600,
-            new Address("1407 Pearlman Avenue, Boston, MA", 12110),
-            Arrays.asList("Development", "QA")
+                "Brian Peters",
+                10600,
+                new Address("1407 Pearlman Avenue, Boston, MA", 12110),
+                Arrays.asList("Development", "QA")
         ));
 
         employees.add(new Employee(
-            "Jack Yang",
-            12900,
-            new Address("4425 Parrish Avenue Smithsons Valley, TX", 78130),
-            Arrays.asList("Sales")
+                "Jack Yang",
+                12900,
+                new Address("4425 Parrish Avenue Smithsons Valley, TX", 78130),
+                Arrays.asList("Sales")
         ));
 
         return employees;

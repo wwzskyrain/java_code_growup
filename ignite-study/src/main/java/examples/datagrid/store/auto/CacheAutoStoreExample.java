@@ -26,9 +26,9 @@ import org.apache.ignite.cache.store.jdbc.JdbcType;
 import org.apache.ignite.cache.store.jdbc.JdbcTypeField;
 import org.apache.ignite.cache.store.jdbc.dialect.H2Dialect;
 import org.apache.ignite.configuration.CacheConfiguration;
-import org.apache.ignite.examples.ExampleNodeStartup;
-import org.apache.ignite.examples.model.Person;
-import org.apache.ignite.examples.util.DbH2ServerStartup;
+import examples.ExampleNodeStartup;
+import examples.model.Person;
+import examples.util.DbH2ServerStartup;
 import org.apache.ignite.transactions.Transaction;
 import org.h2.jdbcx.JdbcConnectionPool;
 

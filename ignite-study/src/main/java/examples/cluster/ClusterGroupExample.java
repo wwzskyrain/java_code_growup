@@ -22,8 +22,8 @@ import org.apache.ignite.IgniteCluster;
 import org.apache.ignite.IgniteException;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.cluster.ClusterGroup;
-import org.apache.ignite.examples.ExampleNodeStartup;
-import org.apache.ignite.examples.ExamplesUtils;
+import examples.ExampleNodeStartup;
+import examples.ExamplesUtils;
 
 /**
  * Demonstrates new functional APIs.
@@ -67,7 +67,7 @@ public class ClusterGroupExample {
             sayHello(ignite, cluster.forHost(randomNode.node()));
 
             // Say hello to all nodes that have current CPU load less than 50%.
-            sayHello(ignite, cluster.forPredicate(n -> n.metrics().getCurrentCpuLoad() < 0.5));
+            sayHello(ignite, cluster.forPredicate(clusterNode -> clusterNode.metrics().getCurrentCpuLoad() < 0.5));
         }
     }
 
@@ -75,12 +75,12 @@ public class ClusterGroupExample {
      * Print 'Hello' message on remote nodes.
      *
      * @param ignite Ignite.
-     * @param grp Cluster group.
+     * @param clusterGroup Cluster group.
      * @throws IgniteException If failed.
      */
-    private static void sayHello(Ignite ignite, final ClusterGroup grp) throws IgniteException {
+    private static void sayHello(Ignite ignite, final ClusterGroup clusterGroup) throws IgniteException {
         // Print out hello message on all cluster nodes.
-        ignite.compute(grp).broadcast(
-            () -> System.out.println(">>> Hello Node: " + grp.ignite().cluster().localNode().id()));
+        ignite.compute(clusterGroup).broadcast(
+            () -> System.out.println(">>> Hello Node: " + clusterGroup.ignite().cluster().localNode().id()));
     }
 }

@@ -22,7 +22,7 @@ import org.apache.ignite.IgniteException;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.cluster.ClusterNode;
 import org.apache.ignite.compute.*;
-import org.apache.ignite.examples.ExampleNodeStartup;
+import examples.ExampleNodeStartup;
 import org.apache.ignite.resources.TaskContinuousMapperResource;
 
 import java.util.*;
@@ -68,7 +68,7 @@ public class ComputeContinuousMapperExample {
 
     /**
      * This task demonstrates how continuous mapper is used. The passed in phrase
-     * is split into multiple words and next word is sent out for processing only
+     * is split into multiple wordsQueue and next word is sent out for processing only
      * when the result for the previous word was received.
      * <p>
      * Note that annotation {@link ComputeTaskNoResultCache} is optional and tells Ignite
@@ -83,7 +83,7 @@ public class ComputeContinuousMapperExample {
         private ComputeTaskContinuousMapper mapper;
 
         /** Word queue. */
-        private final Queue<String> words = new ConcurrentLinkedQueue<>();
+        private final Queue<String> wordsQueue = new ConcurrentLinkedQueue<>();
 
         /** Total character count. */
         private final AtomicInteger totalChrCnt = new AtomicInteger(0);
@@ -94,7 +94,7 @@ public class ComputeContinuousMapperExample {
                 throw new IgniteException("Phrase is empty.");
 
             // Populate word queue.
-            Collections.addAll(words, phrase.split(" "));
+            Collections.addAll(wordsQueue, phrase.split(" "));
 
             // Sends first word.
             sendWord();
@@ -105,13 +105,13 @@ public class ComputeContinuousMapperExample {
         }
 
         /** {@inheritDoc} */
-        @Override public ComputeJobResultPolicy result(ComputeJobResult res, List<ComputeJobResult> rcvd) {
+        @Override public ComputeJobResultPolicy result(ComputeJobResult computeJobResult, List<ComputeJobResult> rcvd) {
             // If there is an error, fail-over to another node.
-            if (res.getException() != null)
-                return super.result(res, rcvd);
+            if (computeJobResult.getException() != null)
+                return super.result(computeJobResult, rcvd);
 
             // Add result to total character count.
-            totalChrCnt.addAndGet(res.<Integer>getData());
+            totalChrCnt.addAndGet(computeJobResult.<Integer>getData());
 
             sendWord();
 
@@ -129,7 +129,7 @@ public class ComputeContinuousMapperExample {
          */
         private void sendWord() {
             // Remove first word from the queue.
-            String word = words.poll();
+            String word = wordsQueue.poll();
 
             if (word != null) {
                 // Map next word.
