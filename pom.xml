@@ -33,6 +33,7 @@
         <module>ignite-study</module>
         <module>hytrix</module>
         <module>hystrix</module>
+        <module>java-socket</module>
     </modules>
 
 
