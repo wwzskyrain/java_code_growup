@@ -1,5 +1,10 @@
 package erik.ximalaya.list;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.*;
+
 public class Solutions {
 
     //    26. Remove Duplicates from Sorted Array
@@ -178,7 +183,7 @@ public class Solutions {
             }
             if (counter == totalLength / 2 + 1) {
 
-                if(totalLength%2==1){
+                if (totalLength % 2 == 1) {
                     return min;
                 }
                 sum += min;
@@ -190,13 +195,59 @@ public class Solutions {
 
     }
 
-    public static void main(String[] args) {
-        int[] num1 = {1, 3};
-        int[] num2 = {2};
-        Solutions solutions = new Solutions();
-        double result = solutions.findMedianSortedArrays(num1, num2);
+    public int longestConsecutive(int[] nums) {
 
-        System.out.println(result);
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            set.add(nums[i]);
+        }
+        int lengthest = 0;
+
+        int start = -1;
+        int end = -1;
+
+        for (Integer integer : set) {
+            int length = 0;
+            for (int num = integer; set.contains(num); num++) {
+                length++;
+            }
+
+            for (int num = integer - 1; set.contains(num); num--) {
+                length++;
+            }
+
+            lengthest = lengthest > length ? lengthest : length;
+        }
+
+        return lengthest;
+
+    }
+
+    @Test
+    public void test_longestConsecutive() {
+
+        int[] nums = new int[]{100, 4, 200, 1, 3, 2};
+
+        int result = longestConsecutive(nums);
+
+        int expected = 4;
+        Assertions.assertEquals(expected, result);
+
+    }
+
+    @Test
+    public void test_twice_remove_iterator() {
+
+        Set<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
+
+        Iterator<Integer> iterator = set.iterator();
+
+        Integer first = iterator.next();
+        System.out.println(set);
+        iterator.remove();
+        System.out.println(set);
+        iterator.remove();
+        System.out.println(set);
 
     }
 
