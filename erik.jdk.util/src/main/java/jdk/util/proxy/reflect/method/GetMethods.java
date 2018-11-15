@@ -13,7 +13,6 @@ public class GetMethods {
             Class studentClass = Class.forName("jdk.util.proxy.reflect.method.Student");
 
             System.out.println("***************获取所有的”公有“方法*******************");
-
             Method[] studentClassMethods = studentClass.getMethods();
             for (Method method : studentClassMethods) {
                 System.out.println(method);

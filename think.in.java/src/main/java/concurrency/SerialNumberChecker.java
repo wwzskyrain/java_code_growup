@@ -57,7 +57,7 @@ public class SerialNumberChecker {
     public static void main(String[] args) throws Exception {
         for (int i = 0; i < SIZE; i++)
             exec.execute(new SerialChecker());
-        // Stop after n seconds if there's an argument:
+        // Stop afterreturning n seconds if there's an argument:
         if (args.length > 0) {
             TimeUnit.SECONDS.sleep(new Integer(args[0]));
             System.out.println("No duplicates detected");

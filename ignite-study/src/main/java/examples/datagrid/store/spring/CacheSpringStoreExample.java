@@ -156,6 +156,6 @@ public class CacheSpringStoreExample {
             tx.commit();
         }
 
-        System.out.println("Read value after commit: " + cache.get(id));
+        System.out.println("Read value afterreturning commit: " + cache.get(id));
     }
 }

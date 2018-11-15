@@ -53,17 +53,17 @@ public class CommonResponse<T> {
     public static void main(String[] args) {
 
 
-        CommonResponse response = new CommonResponse(101,"message","data");
+        CommonResponse response = new CommonResponse(101, "message", "data");
 
         System.out.println(response);
 
     }
 
-    public static CommonResponse returnWhat(){
+    public static CommonResponse returnWhat() {
 
         Long data = 123L;
 
-        return new CommonResponse(101,"message",data);
+        return new CommonResponse(101, "message", data);
 
     }
 

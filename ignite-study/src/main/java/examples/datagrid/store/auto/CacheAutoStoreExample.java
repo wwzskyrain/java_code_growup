@@ -149,7 +149,7 @@ public class CacheAutoStoreExample {
                     tx.commit();
                 }
 
-                System.out.println(">>> Read value after commit: " + cache.get(id));
+                System.out.println(">>> Read value afterreturning commit: " + cache.get(id));
 
                 cache.clear();
 

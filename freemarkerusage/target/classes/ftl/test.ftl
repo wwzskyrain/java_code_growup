@@ -1,5 +1,7 @@
 ${product.url}<br>
 ${product.name}
+get true or false:${product.usable?c}
+get true or false:${product.isUsable()?c}
 
 
 <#if product.hotProduct>
@@ -39,4 +41,7 @@ bar
 baaz
 </@upper>
 wombat
+
+true or false:${booleanV?c}
+
 

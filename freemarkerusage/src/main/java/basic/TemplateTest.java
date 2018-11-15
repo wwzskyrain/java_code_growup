@@ -31,15 +31,16 @@ public class TemplateTest {
 
         Map<String, Object> root = new HashMap<>();
 
-        Product product = new Product("product/green/mouse.html","green mouse");
+        Product product = new Product("product/green/mouse.html", "green mouse");
 
         product.setHotProduct(true);
+        product.setUsable(false);
 
         root.put("product", product);
 
-        root.put("indexOf",new IndexOfMethod());
+        root.put("indexOf", new IndexOfMethod());
 
-        root.put("upper",new UpperDirective());
+        root.put("upper", new UpperDirective());
 
         Template template = null;
 
@@ -51,11 +52,13 @@ public class TemplateTest {
 
         }
 
-        root.put("testBoolean",null);
+        root.put("testBoolean", null);
 
         TradeOrderVo tradeOrderVo = new TradeOrderVo();
         tradeOrderVo.setCompensatableForAlbum(null);
-        root.put("tradeOrderVo",tradeOrderVo);
+        root.put("tradeOrderVo", tradeOrderVo);
+        boolean booleanV = false;
+        root.put("booleanV", booleanV);
 
         Writer out = new BufferedWriter(new OutputStreamWriter(System.out));
 

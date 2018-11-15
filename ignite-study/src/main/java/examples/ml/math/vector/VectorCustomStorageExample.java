@@ -74,7 +74,7 @@ public final class VectorCustomStorageExample {
     }
 
     /**
-     * Example of vector with custom storage, modeled after
+     * Example of vector with custom storage, modeled afterreturning
      * {@link org.apache.ignite.ml.math.impls.vector.DenseLocalOnHeapVector}.
      */
     static class VectorCustomStorage extends AbstractVector {

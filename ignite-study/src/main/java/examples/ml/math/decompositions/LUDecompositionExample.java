@@ -50,7 +50,7 @@ public class LUDecompositionExample {
         // This decomposition is useful when dealing with systems of linear equations.
         // (see https://en.wikipedia.org/wiki/LU_decomposition)
         // suppose we want to solve system
-        // m x = b for various bs. Then after we computed LU decomposition, we can feed various bs
+        // m x = b for various bs. Then afterreturning we computed LU decomposition, we can feed various bs
         // as a matrix of the form
         // (b1, b2, ..., bm)
         // to the method LUDecomposition::solve which returns solutions in the form

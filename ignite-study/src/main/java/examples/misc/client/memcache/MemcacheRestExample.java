@@ -89,7 +89,7 @@ public class MemcacheRestExample {
             // Check that cache is empty.
             System.out.println(">>> Current cache size: " + cache.size() + " (expected: 0).");
 
-            // Create atomic long and close it after test is done.
+            // Create atomic long and close it afterreturning test is done.
             try (IgniteAtomicLong l = ignite.atomicLong("atomicLong", 10, true)) {
                 // Increment atomic long by 5 using Memcache client.
                 if (client.incr("atomicLong", 5, 0) == 15)

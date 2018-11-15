@@ -26,7 +26,7 @@ public class AtomicIntegerTest implements Runnable {
                 System.err.println("Aborting");
                 System.exit(0);
             }
-        }, 5000); // Terminate after 5 seconds
+        }, 5000); // Terminate afterreturning 5 seconds
         ExecutorService exec = Executors.newCachedThreadPool();
         AtomicIntegerTest ait = new AtomicIntegerTest();
         exec.execute(ait);

@@ -88,7 +88,7 @@ public class IgniteSetExample {
         for (int i = 0; i < 10; i++)
             set.add(Integer.toString(i));
 
-        System.out.println("Set size after initializing: " + set.size());
+        System.out.println("Set size afterreturning initializing: " + set.size());
 
         return set;
     }
@@ -105,7 +105,7 @@ public class IgniteSetExample {
         // Write set items on each node.
         ignite.compute().broadcast(new SetClosure(setName));
 
-        System.out.println("Set size after writing [expected=" + (10 + ignite.cluster().nodes().size() * 5) +
+        System.out.println("Set size afterreturning writing [expected=" + (10 + ignite.cluster().nodes().size() * 5) +
             ", actual=" + set.size() + ']');
 
         System.out.println("Iterate over set.");
@@ -142,7 +142,7 @@ public class IgniteSetExample {
         // Clear set.
         set.clear();
 
-        System.out.println("Set size after clearing: " + set.size());
+        System.out.println("Set size afterreturning clearing: " + set.size());
 
         // Remove set.
         set.close();

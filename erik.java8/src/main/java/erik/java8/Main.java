@@ -18,7 +18,7 @@ public class Main {
 
         Integer integer = converter.convert("123");
 
-        Predicate<String> predicate=(s)->s.length()>0;
+        Predicate<String> predicate = (s) -> s.length() > 0;
 
         predicate.test("foo");              // true
         predicate.negate().test("foo");     // false
@@ -48,13 +48,11 @@ public class Main {
         comparator.reversed().compare(p1, p2);  // < 0
 
 
-
         Optional<String> optional = Optional.of("bam");
 
         optional.isPresent();           // true
         optional.get();                 // "bam"
         optional.orElse("fallback");    // "bam"
-
 
 
         optional.ifPresent((s) -> System.out.println(s.charAt(0)));     // "b"

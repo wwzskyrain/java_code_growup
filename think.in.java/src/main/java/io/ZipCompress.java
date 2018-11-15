@@ -30,7 +30,7 @@ public class ZipCompress {
       out.flush();
     }
     out.close();
-    // Checksum valid only after the file has been closed!
+    // Checksum valid only afterreturning the file has been closed!
     print("Checksum: " + csum.getChecksum().getValue());
     // Now extract the files:
     print("Reading file");

@@ -14,12 +14,13 @@ public class DynamicProxy2 {
 
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
+//  这里没有承接"实例变量"，即目标对象targetObject，
+//  所以当method表示的是"实例方法-非静态方法"时是没办法来触发method.invoke()方法的；
                 System.out.println("before method invoke");
 
                 System.out.println("the method name :" + method.getName());
 //              method中有Class类型信息，所以可以以此来区分"构造代理对象时的接口数组"。
-                System.out.println("after method invoke.");
+                System.out.println("afterreturning method invoke.");
 
                 return null;
             }

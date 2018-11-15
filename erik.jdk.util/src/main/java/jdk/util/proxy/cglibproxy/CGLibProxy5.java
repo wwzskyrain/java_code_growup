@@ -32,8 +32,9 @@ public class CGLibProxy5 {
         enhancer.setCallbackFilter(callbackHelper);
         enhancer.setCallbacks(callbackHelper.getCallbacks());
         SampleClass proxy = (SampleClass) enhancer.create();
-        proxy.test(null);
-        proxy.toString();
+        System.out.println("proxy.test(null):"+proxy.test(null));
+        String toStringResult = proxy.toString();       //???不明白的很
+        System.out.println("proxy.toString():"+toStringResult+" class:"+toStringResult.getClass());
         System.out.println(proxy.hashCode());
 
     }

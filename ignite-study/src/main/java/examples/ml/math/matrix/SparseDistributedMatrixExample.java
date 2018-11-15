@@ -56,7 +56,7 @@ public class SparseDistributedMatrixExample {
 
                 System.out.println("Sum of all matrix elements is " + distributedMatrix.sum());
 
-                System.out.println(">>> Destroy SparseDistributedMatrix after using.");
+                System.out.println(">>> Destroy SparseDistributedMatrix afterreturning using.");
                 // Destroy internal cache.
                 distributedMatrix.destroy();
             });

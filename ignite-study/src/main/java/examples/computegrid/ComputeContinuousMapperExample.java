@@ -31,14 +31,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Demonstrates usage of continuous mapper. With continuous mapper
- * it is possible to continue mapping jobs asynchronously even after
+ * it is possible to continue mapping jobs asynchronously even afterreturning
  * initial {@link ComputeTask#map(List, Object)} method completes.
  * <p>
  * String "Hello Continuous Mapper" is passed as an argument for execution
  * of {@link ComputeContinuousMapperExample.ContinuousMapperTask}. As an outcome, participating
  * nodes will print out a single word from the passed in string and return
  * number of characters in that word. However, to demonstrate continuous
- * mapping, next word will be mapped to a node only after the result from
+ * mapping, next word will be mapped to a node only afterreturning the result from
  * previous word has been received.
  * <p>
  * Remote nodes should always be started with special configuration file which

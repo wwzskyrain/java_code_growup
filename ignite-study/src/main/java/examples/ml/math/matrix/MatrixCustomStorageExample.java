@@ -81,7 +81,7 @@ public final class MatrixCustomStorageExample {
     }
 
     /**
-     * Example of vector with custom storage, modeled after
+     * Example of vector with custom storage, modeled afterreturning
      * {@link org.apache.ignite.ml.math.impls.matrix.DenseLocalOnHeapMatrix}.
      */
     static class MatrixCustomStorage extends AbstractMatrix {

@@ -27,7 +27,7 @@ class Blocked3 implements Runnable {
             while (!Thread.interrupted()) {
                 // point1
                 NeedsCleanup n1 = new NeedsCleanup(1);
-                // Start try-finally immediately after definition
+                // Start try-finally immediately afterreturning definition
                 // of n1, to guarantee proper cleanup of n1:
                 try {
                     print("Sleeping");

@@ -26,7 +26,7 @@ public class CGLibProxy2 {  //CGLibProxy的另一种写法
 
                 Object result = proxy.invokeSuper(obj, args);
 
-                System.out.println("after .. ");
+                System.out.println("afterreturning .. ");
 
                 return result;
             }

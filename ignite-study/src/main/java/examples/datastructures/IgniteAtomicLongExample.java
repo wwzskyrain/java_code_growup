@@ -70,7 +70,7 @@ public final class IgniteAtomicLongExample {
             });
 
             System.out.println();
-            System.out.println("Atomic long value after successful CAS: " + atomicLong.get());
+            System.out.println("Atomic long value afterreturning successful CAS: " + atomicLong.get());
         }
     }
 }

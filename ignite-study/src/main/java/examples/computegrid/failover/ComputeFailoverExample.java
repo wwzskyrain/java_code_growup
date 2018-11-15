@@ -37,7 +37,7 @@ import java.util.List;
  * Demonstrates the usage of checkpoints in Ignite.
  * <p>
  * The example tries to compute phrase length. In order to mitigate possible node failures, intermediate
- * result is saved as as checkpoint after each job step.
+ * result is saved as as checkpoint afterreturning each job step.
  * <p>
  * Remote nodes must be started using {@link ComputeFailoverNodeStartup}.
  */
@@ -120,7 +120,7 @@ public class ComputeFailoverExample {
                 // It will be automatically removed when task completes.
                 jobSes.saveCheckpoint(cpKey, this.state);
 
-                // For example purposes, we fail on purpose after first stage.
+                // For example purposes, we fail on purpose afterreturning first stage.
                 // This exception will cause job to be failed over to another node.
                 if (i == 0) {
                     System.out.println();

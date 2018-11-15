@@ -18,14 +18,22 @@ public class CGLibProxy implements MethodInterceptor {
 
         System.out.println("before ...");
 
+        System.out.println("method:"+method.toGenericString());
+
+        System.out.println("methodProxy:"+methodProxy.toString());
+
+//        methodProxy.invoke(o,objects);  //调用循环了，自己调用自己，会java.lang.StackOverflowError异常。
+
+//        method.invoke(o,objects);   //InvocationTargetException     java.lang.StackOverflowError
+
         Object result = methodProxy.invokeSuper(o, objects);
 
-        //      相当于Object result = methodProxy.invoke(new HumenImpl(), objects);
+        //  相当于Object result = methodProxy.invoke(new HumenImpl(), objects);
 
         //  由于CGLib只是对HumenImple类型做代理，并不是对HumenImple的某个实例（对象）做代理，所以invokeSuper也相当于：
         //    Object result = method.invoke(new HumenImpl(), objects);
 
-        System.out.println("after ...");
+        System.out.println("afterreturning ...");
 
         return result;
 

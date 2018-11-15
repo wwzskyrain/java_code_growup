@@ -195,31 +195,50 @@ public class Solutions {
 
     }
 
+    /**
+     * 找出最长的连续(整数值的连续，非元素位置连续)子序列；
+     * <br/>    1   不能在ArrayList的遍历中调用它的remove方法，但是可以在它的iterator的遍历中调用iterator的remove方法，但是每个next只能调用一次；
+     * <br/>    2   若想不按照iterator的next顺序来"删除"元素，可以用List的数据镜像——数组or其他形式，来遍历它并能删除元素。
+     * <br/>    3   这个题目虽然用了双层循环，但是内循环会删除元素，所以整体来讲还是O(n)的。
+     * <br/>    4   还有，不要以为for比while慢，for的代码形式上更简洁呢
+     * <br/>    5   不要以为三木运算符比Math.max快，其实只是少了层函数调用，还不如后者代码简洁
+     * <br/>    6   leetcode的百分比不一定准的。
+     *
+     * @param nums
+     * @return
+     */
     public int longestConsecutive(int[] nums) {
-
-        Set<Integer> set = new HashSet<>();
+        if (nums == null || nums.length == 0)
+            return 0;
+        Set<Integer> hs = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {
-            set.add(nums[i]);
+            hs.add(nums[i]);
         }
-        int lengthest = 0;
+        int max = 0;
 
-        int start = -1;
-        int end = -1;
+        for (int index = 0; index < nums.length; index++) {
 
-        for (Integer integer : set) {
-            int length = 0;
-            for (int num = integer; set.contains(num); num++) {
-                length++;
+            if (hs.contains(nums[index])) {
+                int count = 1;
+                hs.remove(nums[index]);
+
+                int low = nums[index] - 1;
+                while (hs.contains(low)) {
+                    count++;
+                    hs.remove(low);
+                    low--;
+                }
+                int high = nums[index] + 1;
+                while (hs.contains(high)) {
+                    count++;
+                    hs.remove(high);
+                    high++;
+                }
+                max = Math.max(count, max);
             }
 
-            for (int num = integer - 1; set.contains(num); num--) {
-                length++;
-            }
-
-            lengthest = lengthest > length ? lengthest : length;
         }
-
-        return lengthest;
+        return max;
 
     }
 
@@ -249,6 +268,33 @@ public class Solutions {
         iterator.remove();
         System.out.println(set);
 
+    }
+
+//    Two Sum
+
+    public int[] twoSum(int[] nums, int target) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+
+            if(map.containsKey(nums[i])){
+                return new int[]{map.get(nums[i]),i};
+            }else {
+                //为呼应后来着。
+                map.put(target-nums[i],i);
+            }
+        }
+        return null;    //因为题设一定会有且只有一个解，所以这里直接返回null；
+
+    }
+
+    @Test
+    public void test_two_sum() {
+        int[] nums = {3,2,4};
+        int target = 6;
+        int[] except = {1, 2};
+        Assertions.assertArrayEquals(except, twoSum(nums, target));
     }
 
 

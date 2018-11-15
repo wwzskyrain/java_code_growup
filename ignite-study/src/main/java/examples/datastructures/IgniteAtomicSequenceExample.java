@@ -86,7 +86,7 @@ public final class IgniteAtomicSequenceExample {
                 System.out.println("Sequence [currentValue=" + seq.get() + ", afterIncrement=" +
                     seq.incrementAndGet() + ']');
 
-            System.out.println("Sequence after incrementing [expected=" + (firstVal + RETRIES) + ", actual=" +
+            System.out.println("Sequence afterreturning incrementing [expected=" + (firstVal + RETRIES) + ", actual=" +
                 seq.get() + ']');
         }
     }

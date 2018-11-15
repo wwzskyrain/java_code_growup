@@ -75,7 +75,7 @@ public class CacheTransactionExample {
                 deposit(cache, 2, 200);
 
                 System.out.println();
-                System.out.println(">>> Accounts after transfer: ");
+                System.out.println(">>> Accounts afterreturning transfer: ");
                 System.out.println(">>> " + cache.get(1));
                 System.out.println(">>> " + cache.get(2));
 

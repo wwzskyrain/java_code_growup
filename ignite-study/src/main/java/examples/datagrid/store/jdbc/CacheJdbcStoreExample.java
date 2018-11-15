@@ -157,7 +157,7 @@ public class CacheJdbcStoreExample {
             tx.commit();
         }
 
-        System.out.println("Read value after commit: " + cache.get(id));
+        System.out.println("Read value afterreturning commit: " + cache.get(id));
 
         // Clear entry from memory, but keep it in store.
         cache.clear(id);

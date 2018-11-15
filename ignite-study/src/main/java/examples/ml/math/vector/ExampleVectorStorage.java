@@ -26,7 +26,7 @@ import java.io.ObjectOutput;
 import java.util.Arrays;
 
 /**
- * Example vector storage, modeled after {@link ArrayVectorStorage}.
+ * Example vector storage, modeled afterreturning {@link ArrayVectorStorage}.
  */
 class ExampleVectorStorage implements VectorStorage {
     /** */

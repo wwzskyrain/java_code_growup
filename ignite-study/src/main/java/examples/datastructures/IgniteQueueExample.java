@@ -93,7 +93,7 @@ public class IgniteQueueExample {
         for (int i = 0; i < ignite.cluster().nodes().size() * RETRIES * 2; i++)
             queue.put(Integer.toString(i));
 
-        System.out.println("Queue size after initializing: " + queue.size());
+        System.out.println("Queue size afterreturning initializing: " + queue.size());
 
         return queue;
     }
@@ -110,7 +110,7 @@ public class IgniteQueueExample {
         // Read queue items on each node.
         ignite.compute().broadcast(new QueueClosure(queueName, false));
 
-        System.out.println("Queue size after reading [expected=0, actual=" + queue.size() + ']');
+        System.out.println("Queue size afterreturning reading [expected=0, actual=" + queue.size() + ']');
     }
 
     /**
@@ -125,7 +125,7 @@ public class IgniteQueueExample {
         // Write queue items on each node.
         ignite.compute().broadcast(new QueueClosure(queueName, true));
 
-        System.out.println("Queue size after writing [expected=" + ignite.cluster().nodes().size() * RETRIES +
+        System.out.println("Queue size afterreturning writing [expected=" + ignite.cluster().nodes().size() * RETRIES +
             ", actual=" + queue.size() + ']');
 
         System.out.println("Iterate over queue.");
@@ -146,7 +146,7 @@ public class IgniteQueueExample {
         // Clear queue.
         queue.clear();
 
-        System.out.println("Queue size after clearing: " + queue.size());
+        System.out.println("Queue size afterreturning clearing: " + queue.size());
 
         // Remove queue.
         queue.close();

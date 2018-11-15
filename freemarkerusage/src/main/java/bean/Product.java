@@ -5,6 +5,7 @@ public class Product {
     private String url;
     private String name;
     private Boolean isHotProduct;
+    private boolean usable;
 
 
     // As per the JavaBeans spec., this defines the "url" bean property
@@ -39,5 +40,13 @@ public class Product {
 
     public void setHotProduct(Boolean hotProduct) {
         isHotProduct = hotProduct;
+    }
+
+    public boolean isUsable() {
+        return usable;
+    }
+
+    public void setUsable(boolean usable) {
+        this.usable = usable;
     }
 }

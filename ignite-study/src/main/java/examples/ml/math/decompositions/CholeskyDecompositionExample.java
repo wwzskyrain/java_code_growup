@@ -51,7 +51,7 @@ public class CholeskyDecompositionExample {
         // For such systems Cholesky decomposition provides
         // more effective method of solving compared to LU decomposition.
         // Suppose we want to solve system
-        // m x = b for various bs. Then after we computed Cholesky decomposition, we can feed various bs
+        // m x = b for various bs. Then afterreturning we computed Cholesky decomposition, we can feed various bs
         // as a matrix of the form
         // (b1, b2, ..., bm)
         // to the method Cholesky::solve which returns solutions in the form

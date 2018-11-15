@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>spring-study-config</module>
         <module>test.usage</module>
         <module>design.pattern</module>
         <module>erik.java8</module>
@@ -24,16 +23,22 @@
         <module>opencsvtest</module>
         <module>concurrent</module>
         <module>mocktest</module>
-        <module>log4j-study</module>
-        <module>log4j-study</module>
         <module>websoket</module>
         <module>redis-demo</module>
-        <module>spring-content-demo</module>
         <module>leetcode</module>
         <module>ignite-study</module>
-        <module>hytrix</module>
         <module>hystrix</module>
         <module>java-socket</module>
+        <module>erik.velocity</module>
+        <module>erik-guava</module>
+        <module>erik-dom</module>
+        <module>erik-spring-demo</module>
+        <module>erik-spring-deep-analyzing</module>
+        <module>freemarker.demo</module>
+        <module>spring.kafka</module>
+        <module>spring-boot-demo</module>
+        <module>erik-file</module>
+        <module>spring-boot-xmly-rpc</module>
     </modules>
 
 

@@ -28,7 +28,7 @@ import java.io.ObjectOutput;
 import java.util.Arrays;
 
 /**
- * Example matrix storage implementation, modeled after {@link ArrayMatrixStorage}.
+ * Example matrix storage implementation, modeled afterreturning {@link ArrayMatrixStorage}.
  */
 class ExampleMatrixStorage implements MatrixStorage {
     /** Backing data array. */
