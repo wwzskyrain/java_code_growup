@@ -14,11 +14,9 @@
         <module>erik.java8</module>
         <module>erik.jdk.util</module>
         <module>jdbc.study</module>
-        <module>log.study</module>
         <module>springMVCDemo</module>
         <module>think.in.java</module>
         <module>freemarkerusage</module>
-        <module>springdataredisdemo</module>
         <module>junitstudy</module>
         <module>opencsvtest</module>
         <module>concurrent</module>
@@ -26,19 +24,15 @@
         <module>websoket</module>
         <module>redis-demo</module>
         <module>leetcode</module>
-        <module>ignite-study</module>
         <module>hystrix</module>
         <module>java-socket</module>
         <module>erik.velocity</module>
         <module>erik-guava</module>
-        <module>erik-dom</module>
         <module>erik-spring-demo</module>
         <module>erik-spring-deep-analyzing</module>
         <module>freemarker.demo</module>
         <module>spring.kafka</module>
-        <module>spring-boot-demo</module>
         <module>erik-file</module>
-        <module>spring-boot-xmly-rpc</module>
     </modules>
 
 

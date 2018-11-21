@@ -75,5 +75,13 @@ public class AdCouponService {
         }
     }
 
+    public void test_batch_alloc_coupon_by_coupon_ids(Long userId,List<Long> couponIds){
+        try {
+            couponService.batchAllocCouponByCouponIds(userId,couponIds);
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
