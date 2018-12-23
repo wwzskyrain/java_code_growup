@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author finley
+ *
  */
 public class ThreadLocalVariableDemo extends Thread {
 
