@@ -1,26 +1,30 @@
 package erik.ximalaya.config;
 
-//import com.ximalaya.mainstay.spring.config.MainstayConfig;
-
 import com.ximalaya.ad.coupon.rpc.api.CouponActivityRpcThriftService;
+import com.ximalaya.business.trade.command.api.TradeCommandService;
+import com.ximalaya.business.trade.command.thrift.api.ThriftTradeCommandService;
+import com.ximalaya.business.trade.command.thrift.client.TradeCommandServiceClient;
+import com.ximalaya.business.trade.query.api.TradeQueryService;
+import com.ximalaya.business.trade.query.thrift.api.ThriftTradeQueryService;
+import com.ximalaya.business.trade.query.thrift.client.TradeQueryServiceClient;
 import com.ximalaya.mainstay.rpc.route.RoutingType;
 import com.ximalaya.mainstay.spring.config.ClientConfig;
 import com.ximalaya.mainstay.spring.config.ConnectionPoolConfig;
 import com.ximalaya.mainstay.spring.config.MainstayConfig;
 import com.ximalaya.mainstay.spring.thrift.MainstayClient;
-import erik.ximalaya.model.TestBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 @PropertySource("classpath:mainstay.properties")
-public class AdCouponRpcBean {
+@ComponentScan(basePackages = "erik.ximalaya.proxy")
+public class BeanConfig {
 
     @Autowired
     Environment environment;
@@ -54,7 +58,7 @@ public class AdCouponRpcBean {
         return config;
     }
 
-    @Bean
+    @Bean(name = "adCouponRpcServiceClientConfig")
     public ClientConfig clientConfig() {
         ClientConfig clientConfig = new ClientConfig();
 
@@ -65,7 +69,9 @@ public class AdCouponRpcBean {
     }
 
     @Bean(name = "adCouponMainstayClient")
-    public MainstayClient adCouponMainstayClient(MainstayConfig mainstayConfig, ConnectionPoolConfig connectionPoolConfig, ClientConfig clientConfig) {
+    public MainstayClient adCouponMainstayClient(MainstayConfig mainstayConfig,
+                                                 ConnectionPoolConfig connectionPoolConfig,
+                                                 @Qualifier("adCouponRpcServiceClientConfig") ClientConfig clientConfig) {
 
         MainstayClient mainstayClient = new MainstayClient();
         mainstayClient.setMainstayConfig(mainstayConfig);
@@ -74,8 +80,55 @@ public class AdCouponRpcBean {
         mainstayClient.setIfaceClass(CouponActivityRpcThriftService.Iface.class);
 
         return mainstayClient;
+    }
+
+//  trade command service
+
+    @Bean(name = "tradeServiceClientConfig")
+    public ClientConfig tradeServiceClientConfig() {
+
+        ClientConfig clientConfig = new ClientConfig();
+        clientConfig.setGroup(environment.getProperty("business.trade.service.group"));
+        clientConfig.setRoutingType(RoutingType.valueOf(environment.getProperty("business.trade.service.routingType")));
+        return clientConfig;
+    }
+
+    @Bean(name = "tradeCommandServiceIFace")
+    public MainstayClient tradeCommandServiceMainstayClient(MainstayConfig mainstayConfig,
+                                                            ConnectionPoolConfig connectionPoolConfig,
+                                                            @Qualifier("tradeServiceClientConfig") ClientConfig clientConfig) {
+
+        MainstayClient mainstayClient = new MainstayClient();
+        mainstayClient.setMainstayConfig(mainstayConfig);
+        mainstayClient.setPoolConfig(connectionPoolConfig);
+        mainstayClient.setClientConfig(clientConfig);
+        mainstayClient.setIfaceClass(ThriftTradeCommandService.Iface.class);
+        return mainstayClient;
+    }
+
+    @Bean
+    public TradeCommandService tradeCommandService() {
+        return new TradeCommandServiceClient();
+    }
+
+    @Bean(name = "tradeQueryServiceIFace")
+    public MainstayClient tradeQueryServiceMainstayClient(MainstayConfig mainstayConfig,
+                                                          ConnectionPoolConfig connectionPoolConfig,
+                                                          @Qualifier("tradeServiceClientConfig") ClientConfig clientConfig) {
+
+        MainstayClient mainstayClient = new MainstayClient();
+        mainstayClient.setMainstayConfig(mainstayConfig);
+        mainstayClient.setPoolConfig(connectionPoolConfig);
+        mainstayClient.setClientConfig(clientConfig);
+        mainstayClient.setIfaceClass(ThriftTradeQueryService.Iface.class);
+        return mainstayClient;
 
     }
 
+//  很有意思，TradeQueryServiceClient中的Iface会被自动注入-byType
+    @Bean
+    public TradeQueryService tradeQueryService() {
+        return new TradeQueryServiceClient();
+    }
 
 }

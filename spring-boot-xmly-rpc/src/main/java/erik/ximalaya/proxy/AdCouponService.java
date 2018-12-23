@@ -5,6 +5,7 @@ import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
@@ -13,7 +14,7 @@ import java.util.concurrent.*;
 public class AdCouponService {
 
 
-    @Autowired
+    @Resource(name = "adCouponMainstayClient")
     private CouponActivityRpcThriftService.Iface couponService;
 
     private ExecutorService executor = Executors.newCachedThreadPool();

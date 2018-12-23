@@ -1,6 +1,7 @@
 package erik.ximalaya;
 
 import erik.ximalaya.proxy.AdCouponService;
+import erik.ximalaya.proxy.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 
@@ -18,12 +19,15 @@ public class Application implements CommandLineRunner {
     @Autowired
     private AdCouponService adCouponService;
 
+    @Autowired
+    private TradeService tradeService;
+
     @Override
     public void run(String... args) throws Exception {
 
-        System.out.println("hello world !");
+//        adCouponService.test_allocCouponAfterShareActivity();
 
-        adCouponService.test_allocCouponAfterShareActivity();
+        tradeService.test_place_trade_order_and_make_direct_payment();
 
     }
 }

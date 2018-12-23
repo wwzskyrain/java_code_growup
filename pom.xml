@@ -33,6 +33,8 @@
         <module>freemarker.demo</module>
         <module>spring.kafka</module>
         <module>erik-file</module>
+        <module>ignite-study</module>
+        <module>xmly-util</module>
     </modules>
 
 

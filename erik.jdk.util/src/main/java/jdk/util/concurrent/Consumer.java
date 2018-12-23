@@ -15,6 +15,7 @@ public class Consumer implements Runnable {
     public void run() {
         while (true) {
             try {
+                System.out.printf("Thread:%s ,Consumer is taking message from queue:%s \n", Thread.currentThread().toString(), queue.toString());
                 Message take = queue.take();
                 System.out.println("消费消息id：" + take.getId() + " 消息体：" + take.getBody());
             } catch (InterruptedException e) {

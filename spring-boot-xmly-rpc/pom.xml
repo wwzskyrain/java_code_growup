@@ -24,6 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <business.trade.version>2.1.4</business.trade.version>
     </properties>
 
     <dependencies>
@@ -45,6 +46,33 @@
             <groupId>com.ximalaya.ad</groupId>
             <artifactId>ad-coupon-api</artifactId>
             <version>0.5.23</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>business-trade-command-api</artifactId>
+            <version>${business.trade.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>business-trade-query-api</artifactId>
+            <version>${business.trade.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>business-common-lib</artifactId>
+            <version>1.2.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-redis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.amqp</groupId>
+                    <artifactId>spring-rabbit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
