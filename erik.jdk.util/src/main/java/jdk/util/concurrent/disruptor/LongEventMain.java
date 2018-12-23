@@ -30,21 +30,20 @@ public class LongEventMain {
         LongEventProducer producer = new LongEventProducer(ringBuffer);
 
 
-        ByteBuffer bb = ByteBuffer.allocate(8);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(8);
         for (long l = 0; l<10; l++) {
-            bb.putLong(0, l);
-            producer.onData(bb);
+            byteBuffer.putLong(0, l);
+            producer.product(byteBuffer);    //从onData的语义上来说，producer只是处理数据；实际上这个方法应该叫做"product"
             Thread.sleep(1000);
         }
 
         LongEventProducerWithTranslator longEventProducerWithTranslator= new LongEventProducerWithTranslator(ringBuffer);
 
         for(long i = 0l;i<10;i++){
-            bb.putLong(0,i);
-            longEventProducerWithTranslator.onData(bb);
+            byteBuffer.putLong(0,i);
+            longEventProducerWithTranslator.onData(byteBuffer);
             TimeUnit.SECONDS.sleep(1);
         }
-
 
     }
 }

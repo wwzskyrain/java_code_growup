@@ -14,15 +14,12 @@ public class LongEventProducerWithTranslator {
     }
 
     private static final EventTranslatorOneArg<LongEvent, ByteBuffer> TRANSLATOR =
-            new EventTranslatorOneArg<LongEvent, ByteBuffer>() {
-                public void translateTo(LongEvent event, long sequence, ByteBuffer bb) {
-                    event.set(bb.getLong(0));
-                }
-            };
+            ((event, sequence, byteBuffer) -> event.set(byteBuffer.getLong(0)));
 
     /**
      * 这个方法的名字可见，是一旦数据就绪，就。。。。
-     * 然而其内部实现的是"发布事件"，实现原理是-将数据翻译成时间并发布到ringBuffer中。
+     * 然而其内部实现的是"发布事件"，实现原理是-将数据翻译成事件并发布到ringBuffer中。
+     *
      * @param bb
      */
     public void onData(ByteBuffer bb) {

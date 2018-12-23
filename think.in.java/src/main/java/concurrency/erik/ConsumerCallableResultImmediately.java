@@ -43,7 +43,6 @@ class ReportResult<V> implements Runnable {
 
         try {
             V result = future.get();
-
             blockingQueue.add(result);
 
         } catch (InterruptedException e) {
@@ -60,7 +59,7 @@ public class ConsumerCallableResultImmediately {
 
     public static void main(String[] args) {
 
-//        test_polling();
+        test_polling();
         test_thread();
 
     }
@@ -76,7 +75,7 @@ public class ConsumerCallableResultImmediately {
         for (int i = 0; i < 10; i++) {
             Future<String> future = executor.submit(new CallableTask(i));
 
-            executor.submit(new ReportResult(blockingQueue, future));   //两种启动"报告线程"的方式，用"执行器"更好一些吧。
+            executor.submit(new ReportResult(blockingQueue, future));   //两种启动"报告线程"的方式(另一种就是下面的new Thread()了)，用"执行器"更好一些吧。
 //            new Thread(new ReportResult(blockingQueue, future)).start();
         }
 

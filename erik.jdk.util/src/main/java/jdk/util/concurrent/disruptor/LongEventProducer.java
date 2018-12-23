@@ -12,7 +12,8 @@ public class LongEventProducer {
     }
 
 
-    public void onData(ByteBuffer bb) {
+    //方法名命名不好，不符合上下语义，应该该做'product'。
+    public void product(ByteBuffer bb) {
         long sequence = ringBuffer.next();  // Grab the next sequence,aka claim a slot in the Ring Buffer
         try {
             LongEvent event = ringBuffer.get(sequence); // Get the entry in the Disruptor
