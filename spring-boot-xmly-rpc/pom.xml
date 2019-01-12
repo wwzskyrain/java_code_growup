@@ -25,9 +25,22 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <business.trade.version>2.1.4</business.trade.version>
+        <xima.accounting.version>1.2.33</xima.accounting.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>xima-accounting-common-api</artifactId>
+            <version>${xima.accounting.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>xima-accounting-command-api</artifactId>
+            <version>${xima.accounting.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.ximalaya.mainstay</groupId>
@@ -45,7 +58,7 @@
         <dependency>
             <groupId>com.ximalaya.ad</groupId>
             <artifactId>ad-coupon-api</artifactId>
-            <version>0.5.23</version>
+            <version>0.5.27</version>
         </dependency>
 
         <dependency>

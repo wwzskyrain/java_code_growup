@@ -1,12 +1,16 @@
 package erik.ximalaya.proxy;
 
+import com.ximalaya.ad.coupon.rpc.api.ActivityAndPagedCouponsInfoThrift;
 import com.ximalaya.ad.coupon.rpc.api.CouponActivityRpcThriftService;
+import com.ximalaya.ad.coupon.rpc.api.CouponInfo;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -76,9 +80,47 @@ public class AdCouponService {
         }
     }
 
-    public void test_batch_alloc_coupon_by_coupon_ids(Long userId,List<Long> couponIds){
+    public void test_batch_alloc_coupon_by_coupon_ids(Long userId, List<Long> couponIds) {
         try {
-            couponService.batchAllocCouponByCouponIds(userId,couponIds);
+            couponService.batchAllocCouponByCouponIds(userId, couponIds);
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void test_queryActivityAndPagedCouponsInfo() {
+        long actIVityId = 3579l;
+        int pageNo = 1;
+        int pageSize = 3;
+        List<CouponInfo> couponInfos = new ArrayList<>();
+        try {
+            while (true) {
+                ActivityAndPagedCouponsInfoThrift activityAndPagedCouponsInfoThrift = couponService.queryActivityAndPagedCouponsInfo(actIVityId, pageNo, pageSize, true);
+                couponInfos.addAll(activityAndPagedCouponsInfoThrift.getCouponsInfo());
+                if (activityAndPagedCouponsInfoThrift.getCouponsInfo().size() != pageSize) {
+                    break;
+                }
+                pageNo++;
+            }
+
+        } catch (TException e) {
+
+            System.out.println(e);
+
+        }
+
+//        couponInfos.sort(Comparator.comparing(CouponInfo::getId));
+        System.out.println(couponInfos.size());
+        couponInfos.forEach(System.out::println);
+    }
+
+    public void test_query_coupon_details(){
+        try {
+            List<Long> couponIds = new ArrayList<>();
+            couponIds.add(18085l);
+            couponIds.add(1l);
+            List<CouponInfo> couponInfos = couponService.queryCouponDetails(couponIds);
+            System.out.println(couponInfos);
         } catch (TException e) {
             e.printStackTrace();
         }

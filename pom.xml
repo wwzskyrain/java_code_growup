@@ -18,7 +18,6 @@
         <module>think.in.java</module>
         <module>freemarkerusage</module>
         <module>junitstudy</module>
-        <module>opencsvtest</module>
         <module>concurrent</module>
         <module>mocktest</module>
         <module>websoket</module>
@@ -35,6 +34,9 @@
         <module>erik-file</module>
         <module>ignite-study</module>
         <module>xmly-util</module>
+        <module>erik-lucene</module>
+        <module>erik-junit</module>
+        <module>erik-mockito</module>
     </modules>
 
 

@@ -125,7 +125,7 @@ public class BeanConfig {
 
     }
 
-//  很有意思，TradeQueryServiceClient中的Iface会被自动注入-byType
+    //  很有意思，TradeQueryServiceClient中的Iface会被自动注入-byType
     @Bean
     public TradeQueryService tradeQueryService() {
         return new TradeQueryServiceClient();

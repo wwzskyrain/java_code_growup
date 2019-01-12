@@ -25,9 +25,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-//        adCouponService.test_allocCouponAfterShareActivity();
-
-        tradeService.test_place_trade_order_and_make_direct_payment();
+        adCouponService.test_query_coupon_details();
 
     }
 }
