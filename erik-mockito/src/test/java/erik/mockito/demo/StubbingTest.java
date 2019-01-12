@@ -27,8 +27,10 @@ public class StubbingTest {
 
         verify(mockedList).get(999);
 
-//      1.  assertThat() 相等怎么说？
-//      2.  assert 异常？
+
+        System.out.println(mockedList.size());
+
+        System.out.println(mockedList.get(9));
 
     }
 
