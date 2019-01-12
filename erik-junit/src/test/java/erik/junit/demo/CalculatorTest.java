@@ -3,12 +3,11 @@ package erik.junit.demo;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.junit.internal.RealSystem;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
+// 这是junit4的例子
 public class CalculatorTest {
-
 
     public static void main(String[] args) {
 
