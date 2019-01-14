@@ -26,9 +26,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <business.trade.version>2.1.4</business.trade.version>
         <xima.accounting.version>1.2.33</xima.accounting.version>
+        <mainstay.version>2.1.21</mainstay.version>
     </properties>
 
     <dependencies>
+
+
 
         <dependency>
             <groupId>com.ximalaya.business</groupId>
@@ -43,9 +46,17 @@
         </dependency>
 
         <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>xima-accounting-query-api</artifactId>
+            <version>${xima.accounting.version}</version>
+        </dependency>
+
+
+
+        <dependency>
             <groupId>com.ximalaya.mainstay</groupId>
             <artifactId>mainstay-spring</artifactId>
-            <version>2.1.14</version>
+            <version>${mainstay.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>

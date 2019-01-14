@@ -12,6 +12,10 @@ import com.ximalaya.mainstay.spring.config.ClientConfig;
 import com.ximalaya.mainstay.spring.config.ConnectionPoolConfig;
 import com.ximalaya.mainstay.spring.config.MainstayConfig;
 import com.ximalaya.mainstay.spring.thrift.MainstayClient;
+import com.ximalaya.xima.accounting.account.query.api.SubAccountQueryService;
+import com.ximalaya.xima.accounting.account.query.thrift.api.ThriftSubAccountQueryService;
+import com.ximalaya.xima.accounting.account.query.thrift.client.ThriftSubAccountQueryServiceClient;
+import com.ximalaya.xima.accounting.account.query.thrift.translators.SubAccountViewDtoTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -129,6 +133,43 @@ public class BeanConfig {
     @Bean
     public TradeQueryService tradeQueryService() {
         return new TradeQueryServiceClient();
+    }
+
+
+    @Bean(name = "subAccountingQueryServiceClientConfig")
+    public ClientConfig subAccountingQueryServiceClientConfig() {
+
+        ClientConfig clientConfig = new ClientConfig();
+
+        clientConfig.setGroup(environment.getProperty("xima.account.group.name"));
+        clientConfig.setRoutingType(RoutingType.valueOf(environment.getProperty("xima.account.routing.type")));
+        clientConfig.setMultiplex(true);
+
+        return clientConfig;
+    }
+
+    @Bean(name = "subAccountingQueryServiceMainstayClient")
+    public MainstayClient subAccountingQueryServiceMainstayClient(MainstayConfig mainstayConfig,
+                                                 ConnectionPoolConfig connectionPoolConfig,
+                                                 @Qualifier("subAccountingQueryServiceClientConfig") ClientConfig clientConfig) {
+
+        MainstayClient mainstayClient = new MainstayClient();
+        mainstayClient.setMainstayConfig(mainstayConfig);
+        mainstayClient.setPoolConfig(connectionPoolConfig);
+        mainstayClient.setClientConfig(clientConfig);
+        mainstayClient.setIfaceClass(ThriftSubAccountQueryService.Iface.class);
+
+        return mainstayClient;
+    }
+
+    @Bean
+    public SubAccountQueryService getSubAccountQueryServiceBean() {
+        return new ThriftSubAccountQueryServiceClient();
+    }
+
+    @Bean
+    public SubAccountViewDtoTranslator subAccountViewDtoTranslator(){
+        return new SubAccountViewDtoTranslator();
     }
 
 }

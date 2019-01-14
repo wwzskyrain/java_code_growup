@@ -1,7 +1,9 @@
 package erik.ximalaya;
 
+import com.ximalaya.xima.accounting.account.query.api.dto.SubAccountViewDto;
 import erik.ximalaya.proxy.AdCouponService;
 import erik.ximalaya.proxy.TradeService;
+import erik.ximalaya.proxy.XimaAccountServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 
@@ -22,10 +24,14 @@ public class Application implements CommandLineRunner {
     @Autowired
     private TradeService tradeService;
 
+    @Autowired
+    private XimaAccountServiceProxy ximaAccountServiceProxy;
+
     @Override
     public void run(String... args) throws Exception {
 
-        adCouponService.test_query_coupon_details();
+        SubAccountViewDto subAccountViewDto = ximaAccountServiceProxy.querySubAccountByUserId(0, 204717, 100);
+        System.out.println(subAccountViewDto);
 
     }
 }
