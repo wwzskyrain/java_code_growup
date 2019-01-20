@@ -10,8 +10,8 @@
 
     <properties>
         <slf4j.version>1.8.0-beta2</slf4j.version>
-        <java.src.version>1.6</java.src.version>
-        <java.target.version>1.6</java.target.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
 
@@ -48,7 +48,17 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
+        </dependency>
+
+
 
     </dependencies>
+
+
 
 </project>

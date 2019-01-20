@@ -30,8 +30,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        SubAccountViewDto subAccountViewDto = ximaAccountServiceProxy.querySubAccountByUserId(0, 204717, 100);
-        System.out.println(subAccountViewDto);
+        tradeService.test_place_trade_order_and_make_direct_payment();
 
     }
 }

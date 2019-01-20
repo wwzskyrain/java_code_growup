@@ -94,6 +94,7 @@ public class BeanConfig {
         ClientConfig clientConfig = new ClientConfig();
         clientConfig.setGroup(environment.getProperty("business.trade.service.group"));
         clientConfig.setRoutingType(RoutingType.valueOf(environment.getProperty("business.trade.service.routingType")));
+        clientConfig.setMultiplex(true);
         return clientConfig;
     }
 

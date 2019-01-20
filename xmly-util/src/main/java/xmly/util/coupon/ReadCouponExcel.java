@@ -1,51 +1,67 @@
 package xmly.util.coupon;
 
 import org.apache.poi.ss.usermodel.*;
+import xmly.util.coupon.format.StringFormat;
 
 import java.io.*;
-import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import static xmly.util.coupon.CouponConstants.*;
 
 public class ReadCouponExcel {
 
-    private static String INSERT_COUPON_PATTERN = "INSERT INTO ads_coupon.coupon ( name, description, activity_id, generate_rule, type, using_rule, valid_date, create_time, update_time, status, seq, batch_no, is_plus_coupon) VALUES ( '%s', null, %d, '{\"generateType\":null,\"quantity\":0}', 'PAYED_SUBSCRIBE', '{\"usingLimit\":{\"usingLimitType\":\"UNLIMIT\",\"minLimitValue\":0},\"discount\":{\"discountType\":\"RATE\",\"couponValue\":null,\"plusRate\":66,\"broadCasterRate\":100},\"timeRanges\":null,\"amount\":0,\"recvTimes\":0,\"isShowOnAlbum\":0,\"weight\":0,\"manualWeight\":0,\"labelName\":null,\"usingScope\":\"APPOINTED\",\"albums\":[%s]}', '{\"type\":\"FIXED_TIME_PERIOD\",\"startTime\":1546185600000,\"endTime\":1546531199000,\"validDays\":0}', now(), now(), 'CREATED', 1, 0, 0);";
 
+    public static void insertCoupon(String couponXlsFile,
+                                    Integer activityId,
+                                    String activityName) {
 
-    public static void insertCouponFor6370() {
-        File xlsFile = new File("/Users/nali/work_file/think_span_year_12_26_6370.xlsx");
+        File xlsFile = new File(couponXlsFile);
 
-        int activityId = 6370;
+        Calendar calendar = Calendar.getInstance();
+
+        StringBuilder dateBuilder = new StringBuilder()
+                .append(calendar.get(Calendar.YEAR)).append("-")
+                .append(calendar.get(Calendar.MONTH)).append("-")
+                .append(calendar.get(Calendar.DAY_OF_MONTH));
+
+        String sqlFileName = String.format("%s-%d-%s.sql", dateBuilder.toString(), activityId, activityName);
+        System.out.printf("insertCouponSql will be write to file:%s\n", sqlFileName);
         // 获得工作簿
         Workbook workbook = null;
         try {
             PrintWriter writer = new PrintWriter(
                     new BufferedWriter(
-                            new FileWriter("/Users/nali/work_file/add_five_album_coupon_12_26_6370.sql")));
+                            new FileWriter("/Users/nali/work_file/coupon/" + sqlFileName)));
 
             workbook = WorkbookFactory.create(xlsFile);
 
-            // 获得工作表个数
-            int sheetCount = workbook.getNumberOfSheets();
-            // 遍历工作表
+            //只处理第一个sheet
+            Sheet sheet = workbook.getSheetAt(0);
 
-            DecimalFormat decimalFormat = new DecimalFormat("#");
-            for (int i = 0; i < 1; i++) {
-                Sheet sheet = workbook.getSheetAt(i);
-                // 获得行数
-                int rowTotalNumber = sheet.getLastRowNum() + 1;
+            for (int rowNo = 1; rowNo <= sheet.getLastRowNum(); rowNo++) {
 
-                System.out.println("rowTotalNumber:" + rowTotalNumber);
+                Row row = sheet.getRow(rowNo);
 
-                for (int rowNo = 1; rowNo < rowTotalNumber; rowNo++) {
-                    Row row = sheet.getRow(rowNo);
-                    Cell couponIdCell = row.getCell(0);
-                    Cell couponNameCell = row.getCell(1);
+                CouponMetaData couponMetaData = CouponMetaData.excelRowDataParser(row);
 
-                    String albumId = decimalFormat.format(Double.valueOf(couponIdCell.getNumericCellValue()));
-                    String couponName = couponNameCell.getStringCellValue();
-                    System.out.printf("No line:%d\n", rowNo);
-                    writer.println(String.format(INSERT_COUPON_PATTERN, couponName, activityId, albumId));
-                    writer.flush();
-                }
+                Map<String, String> keyValues = new HashMap<>();
+                keyValues.put(KEY_NAME_ALBUM_IDS, couponMetaData.getAlbumIds());
+                keyValues.put(KEY_NAME_COUPON_NAME, couponMetaData.getCouponName());
+                keyValues.put(KEY_NAME_START_TIME, couponMetaData.getStartTime());
+                keyValues.put(KEY_NAME_END_TIME, couponMetaData.getEndTime());
+                keyValues.put(KEY_NAME_PLUS_RATE, couponMetaData.getPlusRate());
+                keyValues.put(KEY_NAME_BROAD_CASTER_RATE, couponMetaData.getBroadCasterRate());
+                keyValues.put(KEY_NAME_ACTIVITY_ID, String.valueOf(activityId));
+
+                String insertCouponSql = StringFormat.format(CouponConstants.INSERT_COUPON_PATTERN, keyValues);
+
+                writer.println(insertCouponSql);
+                System.out.printf("No.%d generate insert sql for albumId:%s couponName:%s\n",
+                        rowNo, couponMetaData.getAlbumIds(), couponMetaData.getCouponName());
+                writer.flush();
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,106 +69,16 @@ public class ReadCouponExcel {
 
     }
 
-    public static void insertCouponFor6384() {
-
-        File xlsFile = new File("/Users/nali/work_file/think_span_year_12_16_6384.xlsx");
-
-        int activityId = 6384;
-        // 获得工作簿
-        Workbook workbook = null;
-        try {
-            PrintWriter writer = new PrintWriter(
-                    new BufferedWriter(
-                            new FileWriter("/Users/nali/work_file/add_five_album_coupon_12_26_6384.sql")));
-
-            workbook = WorkbookFactory.create(xlsFile);
-
-            // 获得工作表个数
-            int sheetCount = workbook.getNumberOfSheets();
-            // 遍历工作表
-
-            DecimalFormat decimalFormat = new DecimalFormat("#");
-            for (int i = 0; i < 1; i++) {
-                Sheet sheet = workbook.getSheetAt(i);
-                // 获得行数
-                int rowTotalNumber = sheet.getLastRowNum() + 1;
-                System.out.println("rowTotalNumber:" + rowTotalNumber);
-                for (int rowNo = 1; rowNo < rowTotalNumber; rowNo++) {
-                    Row row = sheet.getRow(rowNo);
-                    Cell couponIdCell = row.getCell(0);
-                    Cell couponNameCell = row.getCell(1);
-
-                    String albumId = decimalFormat.format(Double.valueOf(couponIdCell.getNumericCellValue()));
-                    String couponName = couponNameCell.getStringCellValue();
-
-                    System.out.printf("No line:%d\n", rowNo);
-                    writer.println(String.format(INSERT_COUPON_PATTERN, couponName, activityId, albumId));
-                    writer.flush();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public static void main(String[] args) {
 
-//        String inputFilePath = "/Users/nali/work_file/coupon/coupon_6370_to_update.xlsx";
-//        String outFilePath = "/Users/nali/work_file/coupon/sql_update_coupon_name_6370.sql";
-//        updateCouponName(inputFilePath, outFilePath);
+        String couponExelFilePath = "/Users/nali/work_file/coupon/shen_lin_qi_jing_batch_1.xlsx";
+        Integer activityId1 = 6833;
+        Integer activityId2 = 6835;
+        String activityName = "shen-lin-qi-jing-batch-3";
+//        insertCoupon(couponExelFilePath, activityId1, activityName);
+        insertCoupon(couponExelFilePath, activityId2, activityName);
 
-        String inputFilePath = "/Users/nali/work_file/coupon/coupon_6384_to_update.xlsx";
-        String outFilePath = "/Users/nali/work_file/coupon/sql_update_coupon_name_6384.sql";
-        updateCouponName(inputFilePath, outFilePath);
-
-
-    }
-
-    public static void updateCouponName(String inputFilePath, String outputFilePath) {
-
-        String updateCouponNameSqlPattern = "update ads_coupon.coupon set name = \"%s\" ,update_time = now() where id = %s;";
-
-        File xlsFile = new File(inputFilePath);
-
-        // 获得工作簿
-        Workbook workbook = null;
-        try {
-            PrintWriter writer = new PrintWriter(
-                    new BufferedWriter(
-                            new FileWriter(outputFilePath)));
-
-            workbook = WorkbookFactory.create(xlsFile);
-
-            // 获得工作表个数
-            int sheetCount = workbook.getNumberOfSheets();
-            // 遍历工作表
-
-            DecimalFormat decimalFormat = new DecimalFormat("#");
-            for (int i = 0; i < 1; i++) {
-                Sheet sheet = workbook.getSheetAt(i);
-                // 获得行数
-                int rowTotalNumber = sheet.getLastRowNum() + 1;
-                System.out.println("rowTotalNumber:" + rowTotalNumber);
-
-                for (int rowNo = 1; rowNo < rowTotalNumber; rowNo++) {
-                    Row row = sheet.getRow(rowNo);
-                    Cell couponIdCell = row.getCell(0);
-                    Cell couponNameCell = row.getCell(1);
-
-                    String couponId = decimalFormat.format(Double.valueOf(couponIdCell.getNumericCellValue()));
-                    String couponName = couponNameCell.getStringCellValue();
-
-                    String updateCouponNameSql = String.format(updateCouponNameSqlPattern, couponName, couponId);
-                    System.out.printf("No line:%d \t %s\n", rowNo, updateCouponNameSql);
-                    writer.println(updateCouponNameSql);
-                    writer.flush();
-                }
-            }
-            System.out.println();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
