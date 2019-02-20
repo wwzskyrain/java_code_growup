@@ -1,4 +1,4 @@
-package erik.java8;
+package erik.java8.stream;
 
 import erik.java8.model.Student;
 
@@ -17,9 +17,6 @@ public class StreamMain2 {
     public static void main(String[] args) {
 
         test2();
-
-
-
 
     }
 

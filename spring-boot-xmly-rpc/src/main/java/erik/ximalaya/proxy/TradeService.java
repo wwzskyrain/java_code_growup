@@ -1,5 +1,6 @@
 package erik.ximalaya.proxy;
 
+import com.alibaba.fastjson.JSON;
 import com.ximalaya.business.common.lib.dto.CommonResponse;
 import com.ximalaya.business.trade.command.api.TradeCommandService;
 import com.ximalaya.business.trade.command.api.dto.*;
@@ -46,13 +47,15 @@ public class TradeService {
         placeTradeOrderDto.setContext(context);
         placeTradeOrderDto.setDomain(1);
         placeTradeOrderDto.setBusinessTypeId(businessTypeId);
+        placeTradeOrderDto.setBuyerId(buyerId);
         placeTradeOrderDto.setTradePaymentDto(tradePaymentDto);
         placeTradeOrderDto.setTradeOrderItemDtos(Arrays.asList(tradeOrderItemDto));
 
-        CommonResponse<PlaceTradeResultDto> placeTradeResultDtoCommonResponse = tradeCommandService.placeTradeOrderAndMakeDirectPayment(placeTradeOrderDto);
+        System.out.println(JSON.toJSONString(placeTradeOrderDto));
 
-
-
+        CommonResponse<PlaceTradeResultDto> placeTradeResultDtoCommonResponse = tradeCommandService
+                .placeTradeOrderAndMakeDirectPayment(placeTradeOrderDto);
+        System.out.println(JSON.toJSONString(placeTradeResultDtoCommonResponse));
     }
 
 }

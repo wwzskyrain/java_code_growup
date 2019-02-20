@@ -1,4 +1,4 @@
-package erik.java8;
+package erik.java8.stream;
 
 import java.util.ArrayList;
 import java.util.List;
