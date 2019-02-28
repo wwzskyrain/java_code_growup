@@ -278,11 +278,11 @@ public class Solutions {
 
         for (int i = 0; i < nums.length; i++) {
 
-            if(map.containsKey(nums[i])){
-                return new int[]{map.get(nums[i]),i};
-            }else {
+            if (map.containsKey(nums[i])) {
+                return new int[]{map.get(nums[i]), i};
+            } else {
                 //为呼应后来着。
-                map.put(target-nums[i],i);
+                map.put(target - nums[i], i);
             }
         }
         return null;    //因为题设一定会有且只有一个解，所以这里直接返回null；
@@ -291,11 +291,71 @@ public class Solutions {
 
     @Test
     public void test_two_sum() {
-        int[] nums = {3,2,4};
+        int[] nums = {3, 2, 4};
         int target = 6;
         int[] except = {1, 2};
         Assertions.assertArrayEquals(except, twoSum(nums, target));
     }
+
+    /**
+     * 203. Remove Linked List Elements
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode removeElements(ListNode head, int val) {
+
+        if (head == null) {
+            return null;
+        }
+
+        ListNode newHead = null;
+        ListNode newPoint = null;
+        ListNode point = head;
+        while (point != null) {
+            if (point.val != val) {
+                newPoint = point;
+                newHead = newPoint;
+                point=point.next;
+                break;
+            } else {
+                point = point.next;
+            }
+        }
+
+        while (point != null) {
+            if (point.val != val) {
+                newPoint.next = point;
+                newPoint = point;
+                point = point.next;
+            } else {
+                point = point.next;
+                newPoint.next=point;
+            }
+        }
+
+        return newHead;
+
+    }
+
+    @Test
+    public void test_remove_elements() {
+
+        String input="1->2->6->3->4->5->6";
+
+        String input1="1->2->3->4->5->6->7";
+
+        String input2="6->6->6";
+
+        ListNode head = ListNode.buildLinkedList(input);
+        ListNode.print(head);
+
+        ListNode headAfterRemove = removeElements(head, 6);
+        ListNode.print(headAfterRemove);
+
+    }
+
+
 
 
 }

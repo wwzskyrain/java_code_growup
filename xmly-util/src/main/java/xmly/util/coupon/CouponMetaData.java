@@ -26,6 +26,9 @@ public class CouponMetaData {
         CouponMetaData couponMetaData = new CouponMetaData();
 
         Cell albumIdsCell = row.getCell(KEY_COLUMN_NO_ALBUM_IDS);
+        if (albumIdsCell == null) {
+            return null;
+        }
         switch (albumIdsCell.getCellType()) {
             case NUMERIC:
                 couponMetaData.setAlbumIds(getIntegralNum(albumIdsCell));
@@ -33,7 +36,7 @@ public class CouponMetaData {
             case STRING:
                 couponMetaData.setAlbumIds(albumIdsCell.getStringCellValue());
             default:
-                throw new RuntimeException("invalid value type for albumIdCell.");
+                return null;
         }
 
         couponMetaData.setCouponName(row.getCell(KEY_COLUMN_NO_COUPON_NAME).getStringCellValue());

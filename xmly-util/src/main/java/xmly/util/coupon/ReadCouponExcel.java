@@ -46,6 +46,10 @@ public class ReadCouponExcel {
 
                 CouponMetaData couponMetaData = CouponMetaData.excelRowDataParser(row);
 
+                if (couponMetaData == null) {
+                    continue;
+                }
+
                 Map<String, String> keyValues = new HashMap<>();
                 keyValues.put(KEY_NAME_ALBUM_IDS, couponMetaData.getAlbumIds());
                 keyValues.put(KEY_NAME_COUPON_NAME, couponMetaData.getCouponName());
@@ -72,10 +76,10 @@ public class ReadCouponExcel {
 
     public static void main(String[] args) {
 
-        String couponExelFilePath = "/Users/nali/work_file/shen-lin-qi-jing-2-18.xlsx";
+        String couponExelFilePath = "/Users/nali/work_file/coupon/shen-lin-qi-jing-2-27.xlsx";
         Integer activityId1 = 6833;
         Integer activityId2 = 6835;
-        String activityName = "shen-lin-qi-jing-batch-6";
+        String activityName = "shen-lin-qi-jing-batch-7";
         insertCoupon(couponExelFilePath, activityId1, activityName);
         insertCoupon(couponExelFilePath, activityId2, activityName);
 
