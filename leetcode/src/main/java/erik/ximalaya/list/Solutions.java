@@ -299,6 +299,7 @@ public class Solutions {
 
     /**
      * 203. Remove Linked List Elements
+     *
      * @param head
      * @param val
      * @return
@@ -316,7 +317,7 @@ public class Solutions {
             if (point.val != val) {
                 newPoint = point;
                 newHead = newPoint;
-                point=point.next;
+                point = point.next;
                 break;
             } else {
                 point = point.next;
@@ -330,7 +331,7 @@ public class Solutions {
                 point = point.next;
             } else {
                 point = point.next;
-                newPoint.next=point;
+                newPoint.next = point;
             }
         }
 
@@ -341,11 +342,11 @@ public class Solutions {
     @Test
     public void test_remove_elements() {
 
-        String input="1->2->6->3->4->5->6";
+        String input = "1->2->6->3->4->5->6";
 
-        String input1="1->2->3->4->5->6->7";
+        String input1 = "1->2->3->4->5->6->7";
 
-        String input2="6->6->6";
+        String input2 = "6->6->6";
 
         ListNode head = ListNode.buildLinkedList(input);
         ListNode.print(head);

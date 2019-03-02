@@ -28,7 +28,6 @@
         <module>java-socket</module>
         <module>erik.velocity</module>
         <module>erik-guava</module>
-        <module>erik-spring-deep-analyzing</module>
         <module>freemarker.demo</module>
         <module>spring.kafka</module>
         <module>erik-file</module>
@@ -37,8 +36,7 @@
         <module>erik-lucene</module>
         <module>erik-junit</module>
         <module>erik-mockito</module>
-        <module>erik-spring-transction</module>
-        <module>erik-spring-redis</module>
+        <module>erik-spring</module>
     </modules>
 
 

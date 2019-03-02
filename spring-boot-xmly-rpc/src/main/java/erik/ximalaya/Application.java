@@ -1,5 +1,6 @@
 package erik.ximalaya;
 
+import com.alibaba.fastjson.JSON;
 import com.ximalaya.xima.accounting.account.query.api.dto.SubAccountViewDto;
 import erik.ximalaya.proxy.AdCouponService;
 import erik.ximalaya.proxy.TradeService;
@@ -30,7 +31,8 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        adCouponService.test_query_coupon_details();
+         ximaAccountServiceProxy.querySubAccountByUserId();
+
 
     }
 }
