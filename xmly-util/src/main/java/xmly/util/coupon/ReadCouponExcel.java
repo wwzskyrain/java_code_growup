@@ -44,6 +44,10 @@ public class ReadCouponExcel {
 
                 Row row = sheet.getRow(rowNo);
 
+                if(row==null){
+                    continue;
+                }
+
                 CouponMetaData couponMetaData = CouponMetaData.excelRowDataParser(row);
 
                 if (couponMetaData == null) {
@@ -76,13 +80,17 @@ public class ReadCouponExcel {
 
     public static void main(String[] args) {
 
-        String couponExelFilePath = "/Users/nali/work_file/coupon/shen-lin-qi-jing-2-27.xlsx";
-        Integer activityId1 = 6833;
-        Integer activityId2 = 6835;
-        String activityName = "shen-lin-qi-jing-batch-7";
-        insertCoupon(couponExelFilePath, activityId1, activityName);
-        insertCoupon(couponExelFilePath, activityId2, activityName);
+        String couponExelFilePath = "/Users/nali/work_file/coupon/nv-shen-jie-2.xlsx";
 
+        Integer activityId6 = 7299;
+        Integer activityId7 = 7300;
+        Integer activityId8 = 7301;
+        Integer activityId9 = 7302;
+        String activityName = "nv-shen-jie-6789";
+        insertCoupon(couponExelFilePath, activityId6, activityName);
+        insertCoupon(couponExelFilePath, activityId7, activityName);
+        insertCoupon(couponExelFilePath, activityId8, activityName);
+        insertCoupon(couponExelFilePath, activityId9, activityName);
 
     }
 

@@ -37,6 +37,7 @@
         <module>erik-junit</module>
         <module>erik-mockito</module>
         <module>erik-spring</module>
+        <module>erik-little-util</module>
     </modules>
 
 

@@ -27,6 +27,7 @@ cron表达式执行| TaskScheduler | schedule(Runnable task, Trigger trigger) sc
     `TaskExecutor`接口，参见`TaskExecutorExample`
 2.  jdk提供的`ScheduledExecutorService`接口，参见`BeeperControl`
 3.  spring提供的`TaskScheduler`接口，参见`TaskSchedulerExample`
+4.
 
 
 ## 2.3 实践小节
