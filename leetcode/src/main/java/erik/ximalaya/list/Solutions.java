@@ -270,8 +270,7 @@ public class Solutions {
 
     }
 
-//    Two Sum
-
+    //    Two Sum
     public int[] twoSum(int[] nums, int target) {
 
         Map<Integer, Integer> map = new HashMap<>();
@@ -355,8 +354,5 @@ public class Solutions {
         ListNode.print(headAfterRemove);
 
     }
-
-
-
 
 }

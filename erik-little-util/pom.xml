@@ -12,6 +12,7 @@
     <modules>
         <module>erik-little-util-log</module>
         <module>erik-little-util-guava-local-cache</module>
+        <module>erik-little-util-db-connection-pool</module>
     </modules>
 
     <properties>

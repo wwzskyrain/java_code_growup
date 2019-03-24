@@ -80,17 +80,14 @@ public class ReadCouponExcel {
 
     public static void main(String[] args) {
 
-        String couponExelFilePath = "/Users/nali/work_file/coupon/nv-shen-jie-2.xlsx";
+        String couponExelFilePath = "/Users/nali/work_file/coupon/shen-lin-qi-jing-8.xlsx";
 
-        Integer activityId6 = 7299;
-        Integer activityId7 = 7300;
-        Integer activityId8 = 7301;
-        Integer activityId9 = 7302;
-        String activityName = "nv-shen-jie-6789";
+        Integer activityId6 = 6833;
+        Integer activityId7 = 6835;
+
+        String activityName = "shen-lin-qi-jing-8";
         insertCoupon(couponExelFilePath, activityId6, activityName);
         insertCoupon(couponExelFilePath, activityId7, activityName);
-        insertCoupon(couponExelFilePath, activityId8, activityName);
-        insertCoupon(couponExelFilePath, activityId9, activityName);
 
     }
 
