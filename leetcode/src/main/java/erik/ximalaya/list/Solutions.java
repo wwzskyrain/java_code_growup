@@ -355,4 +355,63 @@ public class Solutions {
 
     }
 
+    /**
+     * 求字符不重复的最长子字符串，而不是子序列.<br/>
+     * 求最值子串是一个很经典的问题。这里是最长子字符串。扩展一下都是给子字符一个值。<br/>
+     * 解法中有两个东西，一个是算法，一个是算法依赖的数据结构。<br/>
+     * 1.算法指的是使用双指针（前后指针），对所有子字符串进行遍历。遍历的时候对每一个子字符串进行值计算，然后用"最优覆盖次优"的方式找到字符串值的最值。<br/>
+     * 1.1 对子字符串进行计算。这个就要结合各个问题具体分析了；这里是求无重复字符的字符串的长度。
+     * 2.数据结构。
+     * 根据使用数据结构的不同，此题有三种解法。
+     * 首先用Set来判断子字符串中是否有重复字符；再者用hashMap<字符，字符的index>；最后用一个"字符表"来代替hashMap。
+     *
+     * @param s
+     * @return 这是一个统计计数题？不是的。<br/>
+     * Next challenges:<br/>
+     * Longest Substring with At Most Two Distinct Characters <br/>
+     * Longest Substring with At Most K Distinct Characters <br/>
+     * Subarrays with K Different Integers <br/>
+     */
+    public int lengthOfLongestSubstring(String s) {
+
+        Set<Character> characterSet = new HashSet<>();
+
+        int ans = 0, i = 0, j = 0, length = s.length();
+        while (i < length && j < length) {
+            if (characterSet.contains(s.charAt(j))) {
+                characterSet.remove(s.charAt(i));
+                i++;
+            } else {
+                characterSet.add(s.charAt(j));
+                j++;
+                ans = Math.max(ans, j - i);
+            }
+        }
+        return ans;
+    }
+
+    public int lengthOfLongestSubstringI(String s) {
+
+        Map<Character, Integer> map = new HashMap<>();
+        int ans = 0, i = 0, j = 0, length = s.length();
+        while (i < length && j < length) {
+            if (map.keySet().contains(s.charAt(j))) {
+                i = Math.max(i, map.get(s.charAt(j)));  //这是个细节：出现在i之前的重复都不计入"字符串长度"计算的。
+            }
+            ans = Math.max(ans, j - i + 1);
+            map.put(s.charAt(j), j + 1);    //细节：value是index+1，而不是index；因为在被赋值给i时，应该从重复的下标的下一个算起。
+            j++;
+        }
+
+        return ans;
+    }
+
+    @Test
+    public void test_lengthOfLongestSubstring() {
+//        Assertions.assertEquals(3, lengthOfLongestSubstringI("abcabcbb"));
+//        Assertions.assertEquals(1, lengthOfLongestSubstringI("bbbbb"));
+//        Assertions.assertEquals(3, lengthOfLongestSubstringI("pwwkew"));
+        Assertions.assertEquals(2, lengthOfLongestSubstringI("abba"));
+    }
+
 }

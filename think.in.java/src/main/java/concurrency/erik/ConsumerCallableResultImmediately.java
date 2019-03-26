@@ -64,6 +64,13 @@ public class ConsumerCallableResultImmediately {
 
     }
 
+    /**
+     * 思路:给每一个Future创建一个陪伴报告线程，该线程长时间是阻塞在Future.get方法上的；<br/>
+     * 一单get返回，就将这个结果放到一个BlockQueue中。<br/>
+     * 这个思路在CompleteExecution的实现上也是相同的。不同的时，他没有陪伴报告线程<br/>
+     * 它是使用了FutureTask.done()回调函数;该函数在FutureTask正常结束和cancel后被调用的。<br/>
+     * 其实陪伴线程的想法是不成熟的表现；每一个异步框架中肯定有"回调机制"的。<br/>
+     */
     public static void test_thread() {
 
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -73,6 +80,7 @@ public class ConsumerCallableResultImmediately {
         BlockingQueue<String> blockingQueue = new LinkedBlockingDeque<>();
 
         for (int i = 0; i < 10; i++) {
+
             Future<String> future = executor.submit(new CallableTask(i));
 
             executor.submit(new ReportResult(blockingQueue, future));   //两种启动"报告线程"的方式(另一种就是下面的new Thread()了)，用"执行器"更好一些吧。
