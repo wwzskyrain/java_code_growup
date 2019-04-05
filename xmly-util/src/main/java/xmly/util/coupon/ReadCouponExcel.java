@@ -23,7 +23,7 @@ public class ReadCouponExcel {
 
         StringBuilder dateBuilder = new StringBuilder()
                 .append(calendar.get(Calendar.YEAR)).append("-")
-                .append(calendar.get(Calendar.MONTH)).append("-")
+                .append(calendar.get(Calendar.MONTH) + 1).append("-")
                 .append(calendar.get(Calendar.DAY_OF_MONTH));
 
         String sqlFileName = String.format("%s-%d-%s.sql", dateBuilder.toString(), activityId, activityName);
@@ -44,7 +44,7 @@ public class ReadCouponExcel {
 
                 Row row = sheet.getRow(rowNo);
 
-                if(row==null){
+                if (row == null) {
                     continue;
                 }
 
@@ -62,8 +62,9 @@ public class ReadCouponExcel {
                 keyValues.put(KEY_NAME_PLUS_RATE, couponMetaData.getPlusRate());
                 keyValues.put(KEY_NAME_BROAD_CASTER_RATE, couponMetaData.getBroadCasterRate());
                 keyValues.put(KEY_NAME_ACTIVITY_ID, String.valueOf(activityId));
+                keyValues.put(KEY_NAME_COUPON_VALUE, couponMetaData.getPlusRate());
 
-                String insertCouponSql = StringFormat.format(CouponConstants.INSERT_COUPON_PATTERN, keyValues);
+                String insertCouponSql = StringFormat.format(CouponConstants.INSERT_VALUE_COUPON_PATTERN, keyValues);
 
                 writer.println(insertCouponSql);
                 System.out.printf("No.%d generate insert sql for albumId:%s couponName:%s\n",
@@ -80,14 +81,14 @@ public class ReadCouponExcel {
 
     public static void main(String[] args) {
 
-        String couponExelFilePath = "/Users/nali/work_file/coupon/shen-lin-qi-jing-8.xlsx";
+        String couponExelFilePath = "/Users/nali/work_file/coupon/xima-jiang-shu.xlsx";
 
-        Integer activityId6 = 6833;
-        Integer activityId7 = 6835;
+        Integer activityId1 = 7511;
+//        Integer activityId1 = 7347;
 
-        String activityName = "shen-lin-qi-jing-8";
-        insertCoupon(couponExelFilePath, activityId6, activityName);
-        insertCoupon(couponExelFilePath, activityId7, activityName);
+        String activityName = "xima-jiang-shu";
+        insertCoupon(couponExelFilePath, activityId1, activityName);
+
 
     }
 

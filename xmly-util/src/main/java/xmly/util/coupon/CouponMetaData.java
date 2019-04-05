@@ -35,6 +35,7 @@ public class CouponMetaData {
                 break;
             case STRING:
                 couponMetaData.setAlbumIds(albumIdsCell.getStringCellValue());
+                break;
             default:
                 return null;
         }
@@ -55,7 +56,7 @@ public class CouponMetaData {
     }
 
     public static String getIntegralNum(Cell cell) {
-        return new BigDecimal(cell.getNumericCellValue()).toString();
+        return new BigDecimal(cell.getNumericCellValue()).setScale(2,BigDecimal.ROUND_HALF_UP).toString();
     }
 
     public String getAlbumIds() {

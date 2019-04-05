@@ -27,12 +27,16 @@
         <business.trade.version>2.1.4</business.trade.version>
         <xima.accounting.version>1.2.33</xima.accounting.version>
         <mainstay.version>2.1.21</mainstay.version>
+        <business.promotion.plan.version>1.0.6</business.promotion.plan.version>
     </properties>
 
     <dependencies>
 
-
-
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>business-promotion-plan-command-api</artifactId>
+            <version>${business.promotion.plan.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.ximalaya.business</groupId>
             <artifactId>xima-accounting-common-api</artifactId>
@@ -52,7 +56,6 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>com.ximalaya.mainstay</groupId>
             <artifactId>mainstay-spring</artifactId>
@@ -65,6 +68,19 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>com.ximalaya.mainstay</groupId>
+            <artifactId>mainstay-rpc-thrift</artifactId>
+            <version>${mainstay.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>business-product-query-api</artifactId>
+            <version>2.2.12</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.ximalaya.ad</groupId>

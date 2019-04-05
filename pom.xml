@@ -10,33 +10,30 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>test.usage</module>
+        <module>concurrent</module>
         <module>design.pattern</module>
         <module>erik.java8</module>
         <module>erik.jdk.util</module>
-        <module>jdbc.study</module>
-        <module>springMVCDemo</module>
-        <module>think.in.java</module>
-        <module>freemarkerusage</module>
-        <module>junitstudy</module>
-        <module>concurrent</module>
-        <module>mocktest</module>
-        <module>websoket</module>
-        <module>redis-demo</module>
-        <module>leetcode</module>
-        <module>hystrix</module>
-        <module>java-socket</module>
         <module>erik.velocity</module>
-        <module>freemarker.demo</module>
-        <module>spring.kafka</module>
         <module>erik-file</module>
-        <module>ignite-study</module>
-        <module>xmly-util</module>
-        <module>erik-lucene</module>
+        <module>erik-hystix</module>
         <module>erik-junit</module>
+        <module>erik-little-util</module>
+        <module>erik-leetcode</module>
+        <module>erik-lucene</module>
         <module>erik-mockito</module>
         <module>erik-spring</module>
-        <module>erik-little-util</module>
+        <module>ignite-study</module>
+        <module>java-socket</module>
+        <module>jdbc.study</module>
+        <module>mocktest</module>
+        <module>redis-demo</module>
+        <module>spring.kafka</module>
+        <module>springMVCDemo</module>
+        <module>test.usage</module>
+        <module>think.in.java</module>
+        <module>websoket</module>
+        <module>xmly-util</module>
     </modules>
 
 

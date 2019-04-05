@@ -21,7 +21,7 @@ public class AccountServiceImplWithTransactionTemplate implements AccountService
     private TransactionTemplate transactionTemplate;
 
     @Override
-    public void transfer(String outer, String inner, BigDecimal money) {
+    public void transfer(final String outer,final String inner,final BigDecimal money) {
 
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             @Override

@@ -98,10 +98,10 @@ public class Interrupting {
             Executors.newCachedThreadPool();
 
     static void test(Runnable r) throws InterruptedException {
-        Future<?> f = exec.submit(r);
+        Future<?> future = exec.submit(r);
         TimeUnit.MILLISECONDS.sleep(1000);
         print("Interrupting " + r.getClass().getName());
-        f.cancel(true); // Interrupts if running
+        future.cancel(true); // Interrupts if running
         print("Interrupt sent to " + r.getClass().getName());
     }
 

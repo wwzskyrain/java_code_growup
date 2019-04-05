@@ -2,7 +2,7 @@ package concurrency;//: concurrency/CaptureUncaughtException.java
 
 import java.util.concurrent.*;
 
-class ExceptionThread2 implements Runnable {
+class ExceptionThread2Runnable implements Runnable {
     public void run() {
         Thread t = Thread.currentThread();
         System.out.println("run() by " + t);
@@ -16,6 +16,7 @@ class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     public void uncaughtException(Thread t, Throwable e) {
         System.out.println("caught " + e);
+        throw new RuntimeException("exception thrown from MyUncaughtExceptionHandler");
     }
 
 }
@@ -38,7 +39,7 @@ public class CaptureUncaughtException {
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool(
                 new HandlerThreadFactory());
-        exec.execute(new ExceptionThread2());
+        exec.execute(new ExceptionThread2Runnable());
 
         exec.shutdown();
     }
