@@ -19,7 +19,6 @@
         <module>erik-hystix</module>
         <module>erik-junit</module>
         <module>erik-little-util</module>
-        <module>erik-leetcode</module>
         <module>erik-lucene</module>
         <module>erik-mockito</module>
         <module>erik-spring</module>

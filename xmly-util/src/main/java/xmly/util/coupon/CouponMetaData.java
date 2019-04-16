@@ -56,7 +56,7 @@ public class CouponMetaData {
     }
 
     public static String getIntegralNum(Cell cell) {
-        return new BigDecimal(cell.getNumericCellValue()).setScale(2,BigDecimal.ROUND_HALF_UP).toString();
+        return new BigDecimal(cell.getNumericCellValue()).setScale(0, BigDecimal.ROUND_HALF_UP).toString();
     }
 
     public String getAlbumIds() {

@@ -4,6 +4,7 @@ import erik.java8.Person;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -27,15 +28,24 @@ public class ReduceDemo {
         System.out.println("count:" + counter);
 
         String stringConcat = Person.getPersons().stream().map(Person::getFirstName).distinct().sorted().collect(Collectors.joining());
-        System.out.println("stringConcat："+stringConcat);
+        System.out.println("stringConcat：" + stringConcat);
     }
 
     public static void main(String[] args) {
 //        counter();
-        reduceDemo();
+//        reduceDemo();
+        test_average();
     }
 
-    public static void collect(){
+    public static void test_average() {
+
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+//        System.out.println(list.stream().mapToDouble(Double::valueOf).average().getAsDouble());
+//
+//        System.out.println(list.stream().collect(Collectors.averagingDouble(Double::valueOf)));
+
+        list.stream().reduce(0, (a, b) -> a + b);
+
     }
 
 }

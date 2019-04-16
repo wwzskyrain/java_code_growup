@@ -8,9 +8,6 @@
     <groupId>erik.ximalaya</groupId>
     <version>1.0.0</version>
 
-    <name>erik.spring.deep.analyzing</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

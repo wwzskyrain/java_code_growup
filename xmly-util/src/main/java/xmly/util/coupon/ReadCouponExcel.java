@@ -4,9 +4,7 @@ import org.apache.poi.ss.usermodel.*;
 import xmly.util.coupon.format.StringFormat;
 
 import java.io.*;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static xmly.util.coupon.CouponConstants.*;
 
@@ -56,7 +54,7 @@ public class ReadCouponExcel {
 
                 Map<String, String> keyValues = new HashMap<>();
                 keyValues.put(KEY_NAME_ALBUM_IDS, couponMetaData.getAlbumIds());
-                keyValues.put(KEY_NAME_COUPON_NAME, couponMetaData.getCouponName());
+                keyValues.put(KEY_NAME_COUPON_NAME, couponMetaData.getCouponName().replace('\'',' '));
                 keyValues.put(KEY_NAME_START_TIME, couponMetaData.getStartTime());
                 keyValues.put(KEY_NAME_END_TIME, couponMetaData.getEndTime());
                 keyValues.put(KEY_NAME_PLUS_RATE, couponMetaData.getPlusRate());
@@ -64,7 +62,7 @@ public class ReadCouponExcel {
                 keyValues.put(KEY_NAME_ACTIVITY_ID, String.valueOf(activityId));
                 keyValues.put(KEY_NAME_COUPON_VALUE, couponMetaData.getPlusRate());
 
-                String insertCouponSql = StringFormat.format(CouponConstants.INSERT_VALUE_COUPON_PATTERN, keyValues);
+                String insertCouponSql = StringFormat.format(CouponConstants.INSERT_DISCOUNT_COUPON_PATTERN, keyValues);
 
                 writer.println(insertCouponSql);
                 System.out.printf("No.%d generate insert sql for albumId:%s couponName:%s\n",
@@ -81,14 +79,17 @@ public class ReadCouponExcel {
 
     public static void main(String[] args) {
 
-        String couponExelFilePath = "/Users/nali/work_file/coupon/xima-jiang-shu.xlsx";
 
-        Integer activityId1 = 7511;
-//        Integer activityId1 = 7347;
+        String couponExcelFilePathPattern = "/Users/nali/work_file/coupon/423-%d.xlsx";
 
-        String activityName = "xima-jiang-shu";
-        insertCoupon(couponExelFilePath, activityId1, activityName);
+        List<Integer> activityIds = Arrays.asList(7545,7546,7547);
 
+        for (int i = 0; i < activityIds.size(); i++) {
+            Integer activity = activityIds.get(i);
+            String couponExcelFilePath = String.format(couponExcelFilePathPattern,activity);
+            String activityName = activity+"name";
+            insertCoupon(couponExcelFilePath,activity,activityName);
+        }
 
     }
 
