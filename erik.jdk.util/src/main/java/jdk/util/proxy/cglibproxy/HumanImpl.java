@@ -2,7 +2,7 @@ package jdk.util.proxy.cglibproxy;
 
 import jdk.util.proxy.staticproxy.Humen;
 
-public final class HumenImpl implements Humen {
+public class HumanImpl implements Humen {
 
     @Override
     public void eat(String food) {

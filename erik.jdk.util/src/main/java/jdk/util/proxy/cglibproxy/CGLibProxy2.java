@@ -13,7 +13,7 @@ public class CGLibProxy2 {  //CGLibProxy的另一种写法
 
         Enhancer enhancer = new Enhancer();
 
-        enhancer.setSuperclass(HumenImpl.class);
+        enhancer.setSuperclass(HumanImpl.class);
 
         enhancer.setCallback(new MethodInterceptor() {
 
@@ -39,9 +39,9 @@ public class CGLibProxy2 {  //CGLibProxy的另一种写法
         System.out.println("代理对象的类型的父类型"+proxyInstance.getClass().getSuperclass());
         System.out.println("代理对象的接口类型：" + Arrays.toString(proxyInstance.getClass().getInterfaces()));
 
-        if (proxyInstance instanceof HumenImpl) {
+        if (proxyInstance instanceof HumanImpl) {
 
-            HumenImpl humenProxy = (HumenImpl) proxyInstance;
+            HumanImpl humenProxy = (HumanImpl) proxyInstance;
 
             humenProxy.eat("rice");
             humenProxy.additionalMethod();
