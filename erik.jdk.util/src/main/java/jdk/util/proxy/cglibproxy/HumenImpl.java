@@ -22,6 +22,6 @@ public final class HumenImpl implements Humen {
 
     @Override
     public String toString() {
-        return "HumenImpl toString method is invoked !";
+        return "HumanImpl toString method is invoked !";
     }
 }

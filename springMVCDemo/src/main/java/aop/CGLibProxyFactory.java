@@ -59,7 +59,8 @@ public class CGLibProxyFactory {
 
     public static void main(String[] args) {
 
-        UserDao proxy = (UserDao) new CGLibProxyFactory(new UserDao()).createProxy();
+        UserDao userDao = new UserDao();
+        UserDao proxy = (UserDao) new CGLibProxyFactory(userDao).createProxy();
         proxy.get("hello");
         proxy.add("world");
 

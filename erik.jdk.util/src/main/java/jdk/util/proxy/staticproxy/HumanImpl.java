@@ -1,11 +1,11 @@
 package jdk.util.proxy.staticproxy;
 
-public class HumenImpl implements Humen,Animal {
+public class HumanImpl implements Humen,Animal {
 
     @Override
     public void eat(String food) {
 
-        System.out.println("Class HumenImpl:eat " + food);
+        System.out.println("Class HumanImpl:eat " + food);
     }
 
     public void additionalMethod() {
@@ -21,11 +21,11 @@ public class HumenImpl implements Humen,Animal {
 
     @Override
     public void drink(String something) {
-        System.out.println("Class HumenImpl:drink " + something);
+        System.out.println("Class HumanImpl:drink " + something);
     }
 
     @Override
     public String toString() {
-        return "HumenImpl toString method is invoked !";
+        return "HumanImpl toString method is invoked !";
     }
 }

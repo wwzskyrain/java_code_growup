@@ -28,10 +28,10 @@ public class CGLibProxy implements MethodInterceptor {
 
         Object result = methodProxy.invokeSuper(o, objects);
 
-        //  相当于Object result = methodProxy.invoke(new HumenImpl(), objects);
+        //  相当于Object result = methodProxy.invoke(new HumanImpl(), objects);
 
         //  由于CGLib只是对HumenImple类型做代理，并不是对HumenImple的某个实例（对象）做代理，所以invokeSuper也相当于：
-        //    Object result = method.invoke(new HumenImpl(), objects);
+        //    Object result = method.invoke(new HumanImpl(), objects);
 
         System.out.println("afterreturning ...");
 

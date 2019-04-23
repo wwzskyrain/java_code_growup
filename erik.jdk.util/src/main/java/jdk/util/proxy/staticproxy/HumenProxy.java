@@ -5,7 +5,7 @@ public class HumenProxy implements Humen {
     private Humen humen;
 
     public HumenProxy() {
-        humen = new HumenImpl();
+        humen = new HumanImpl();
     }
 
     @Override
