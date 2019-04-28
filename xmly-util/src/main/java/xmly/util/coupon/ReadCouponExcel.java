@@ -80,9 +80,9 @@ public class ReadCouponExcel {
     public static void main(String[] args) {
 
 
-        String couponExcelFilePathPattern = "/Users/nali/work_file/coupon/423-%d.xlsx";
+        String couponExcelFilePathPattern = "/Users/nali/work_file/coupon/qi-zi-wen-dang.xlsx";
 
-        List<Integer> activityIds = Arrays.asList(7545,7546,7547);
+        List<Integer> activityIds = Arrays.asList(8025);
 
         for (int i = 0; i < activityIds.size(); i++) {
             Integer activity = activityIds.get(i);

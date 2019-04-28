@@ -4,7 +4,7 @@ public class AnnotationExample {
 
 
     @Override       //Override 是Source级别的注解，在运行时是解析不到的。
-    @MethodInfo(author = "erik.wnag",comments = "Main method",date = "march 26 2018")
+    @MethodInfo(author = "erik.wnag",comments = "FamilyPlateGameLockVersion method",date = "march 26 2018")
     public String toString() {
         return "over toString method";
     }

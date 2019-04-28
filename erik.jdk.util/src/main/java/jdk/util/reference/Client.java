@@ -1,7 +1,7 @@
 package jdk.util.reference;
 
 /**
- * Main class
+ * FamilyPlateGameLockVersion class
  *
  * @author BrightLoong
  * @date 2018/5/24
