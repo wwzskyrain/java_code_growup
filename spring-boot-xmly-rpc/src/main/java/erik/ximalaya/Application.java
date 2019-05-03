@@ -1,8 +1,5 @@
 package erik.ximalaya;
 
-import com.alibaba.fastjson.JSON;
-import com.ximalaya.business.product.query.api.ProductItemQueryService;
-import com.ximalaya.xima.accounting.account.query.api.dto.SubAccountViewDto;
 import erik.ximalaya.proxy.AdCouponService;
 import erik.ximalaya.proxy.TradeService;
 import erik.ximalaya.proxy.XimaAccountServiceProxy;
@@ -11,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
@@ -34,7 +32,7 @@ public class Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-
+        tradeService.test_place_trade_order_and_make_direct_payment();
 
     }
 }
