@@ -7,12 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ServiceConfig {
+public class AccountServiceImplWithTransactionAnnotationConfig {
 
     @Bean
     public AccountService accountService(){
 
-        AccountService accountService = new AccountServiceImplWithTransactionTemplate();
+        AccountService accountService = new AccountServiceImplWithTransactionalAnnotation();
         return accountService;
     }
 }

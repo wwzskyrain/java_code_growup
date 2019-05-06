@@ -4,10 +4,15 @@ import erik.spring.transaction.bootstrap.config.*;
 import erik.spring.transaction.service.AccountService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import java.math.BigDecimal;
 
+/**
+ * @author: erik.wang
+ * @Date: 2019/5/7
+ * 编程式事务demo，主要看AccountService服务的实现类AccountServiceImplWithTransactionTemplate，
+ * 它是通过TransactionTemplate来实现事务的管理的。
+ */
 public class MainProgrammingTransaction {
 
     public static void main(String[] args) {
@@ -15,7 +20,7 @@ public class MainProgrammingTransaction {
         ApplicationContext context = new AnnotationConfigApplicationContext(
                 DaoConfig.class,
                 DataSourceConfig.class,
-                ServiceConfig.class,
+                AccountServiceImplWithTransactionTemplateConfig.class,
                 DataSourceTransactionManagerConfig.class,
                 TransactionTemplateConfig.class
         );
