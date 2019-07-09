@@ -1,6 +1,7 @@
 package threadlocal;
 
 public class ThreadLocalDemo {
+
     private static ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
     private static int value = 0;
 
@@ -19,6 +20,7 @@ public class ThreadLocalDemo {
     }
 
     public static void main(String[] args) throws InterruptedException {
+
         Thread thread = new Thread(new ThreadLocalThread());
         Thread thread2 = new Thread(new ThreadLocalThread());
         thread.start();

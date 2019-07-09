@@ -1,5 +1,7 @@
 package jdk.util.string;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,4 +26,18 @@ public class LongToHexStrig {
 //  [0, 1, 2, 8, 10, 11, 1f, 20, 21, 40, 7f]
         System.out.println(hexStrings);
     }
+
+
+    @Test
+    public void test_string_buffer(){
+        StringBuffer stringBuffer = new StringBuffer();
+
+        for (int i = 0; i < 9; i++) {
+            stringBuffer.append(i);
+        }
+
+        System.out.println(stringBuffer);
+
+    }
+
 }

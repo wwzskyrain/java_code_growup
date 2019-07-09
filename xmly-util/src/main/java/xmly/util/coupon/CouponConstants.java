@@ -15,8 +15,8 @@ public class CouponConstants {
     public static final String KEY_NAME_COUPON_VALUE = "couponValue";
 
 
-    public static final Integer KEY_COLUMN_NO_ALBUM_IDS = 0;
-    public static final Integer KEY_COLUMN_NO_COUPON_NAME = 1;
+    public static final Integer KEY_COLUMN_NO_ALBUM_IDS = 2;
+    public static final Integer KEY_COLUMN_NO_COUPON_NAME = 0;
     public static final Integer KEY_COLUMN_NO_START_TIME = 5;
     public static final Integer KEY_COLUMN_NO_END_TIME = 6;
     public static final Integer KEY_COLUMN_NO_PLUS_RATE = 7;

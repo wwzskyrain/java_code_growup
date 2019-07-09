@@ -38,7 +38,7 @@ public class ReadCouponExcel {
             //只处理第一个sheet
             Sheet sheet = workbook.getSheetAt(0);
 
-            for (int rowNo = 1; rowNo <= sheet.getLastRowNum(); rowNo++) {
+            for (int rowNo = 2; rowNo <= sheet.getLastRowNum(); rowNo++) {
 
                 Row row = sheet.getRow(rowNo);
 
@@ -54,7 +54,7 @@ public class ReadCouponExcel {
 
                 Map<String, String> keyValues = new HashMap<>();
                 keyValues.put(KEY_NAME_ALBUM_IDS, couponMetaData.getAlbumIds());
-                keyValues.put(KEY_NAME_COUPON_NAME, couponMetaData.getCouponName().replace('\'',' '));
+                keyValues.put(KEY_NAME_COUPON_NAME, couponMetaData.getCouponName().replace('\'', ' '));
                 keyValues.put(KEY_NAME_START_TIME, couponMetaData.getStartTime());
                 keyValues.put(KEY_NAME_END_TIME, couponMetaData.getEndTime());
                 keyValues.put(KEY_NAME_PLUS_RATE, couponMetaData.getPlusRate());
@@ -79,16 +79,17 @@ public class ReadCouponExcel {
 
     public static void main(String[] args) {
 
+        Map<Integer, String> activityId2couponExcelFilePathPattern = new HashMap<>();
 
-        String couponExcelFilePathPattern = "/Users/nali/work_file/coupon/qi-zi-wen-dang.xlsx";
+        activityId2couponExcelFilePathPattern.put(8637, "/Users/nali/work_file/coupon/coupon-66-5-1.xlsx");
+        activityId2couponExcelFilePathPattern.put(8638, "/Users/nali/work_file/coupon/coupon-66-7-1.xlsx");
 
-        List<Integer> activityIds = Arrays.asList(8025);
+        for (Map.Entry<Integer, String> entry : activityId2couponExcelFilePathPattern.entrySet()) {
+            Integer activityId = entry.getKey();
+            String couponExcelFilePath = entry.getValue();
 
-        for (int i = 0; i < activityIds.size(); i++) {
-            Integer activity = activityIds.get(i);
-            String couponExcelFilePath = String.format(couponExcelFilePathPattern,activity);
-            String activityName = activity+"name";
-            insertCoupon(couponExcelFilePath,activity,activityName);
+            String activityName = activityId + "name";
+            insertCoupon(couponExcelFilePath, activityId, activityName);
         }
 
     }
