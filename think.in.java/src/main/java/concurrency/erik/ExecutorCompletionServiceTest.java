@@ -24,11 +24,11 @@ public class ExecutorCompletionServiceTest {
             ecs.submit(s);
         int n = solvers.size();
         for (int i = 0; i < n; ++i) {
-            Integer r = null;
+            Integer result = null;
             try {
-                r = ecs.take().get();
-                if (r != null) {
-                    System.out.printf("i=%d result=%d\n", i, r);
+                result = ecs.take().get();
+                if (result != null) {
+                    System.out.printf("i=%d result=%d\n", i, result);
                 }
 
             } catch (InterruptedException e) {
