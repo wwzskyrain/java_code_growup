@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * @Date 2019-08-12
  * @Created by erik
  */
-public class First {
+public class FirstSolution {
 
     public static void main(String[] args) {
 
@@ -62,6 +62,7 @@ public class First {
         String pattern = "%" + maxCountLength + "d %s\n";
         for (Map.Entry<String, Integer> stringIntegerEntry : line2CountMapEntries) {
             if (n > 0) {
+                // 输出最终结果
                 log(pattern, stringIntegerEntry.getValue(), stringIntegerEntry.getKey());
                 n--;
             } else {

@@ -98,24 +98,4 @@ public class SynUtil {
 
     }
 
-    @Test
-    public void test_() {
-
-        AtomicInteger atomicInteger = new AtomicInteger();
-
-        ExecutorService executorService = Executors.newCachedThreadPool();
-
-        for (int i = 0; i < 5; i++) {
-
-            executorService.submit(() -> {
-
-                Random random = new Random(System.currentTimeMillis() % 1000);
-                int addAndGet = atomicInteger.addAndGet(random.nextInt(10));
-                System.out.printf("thread %s atomicInteger:%d ,addAndGet:%d \n", Thread.currentThread().getName(), atomicInteger.get(), addAndGet);
-            });
-
-        }
-    }
-
-
 }
