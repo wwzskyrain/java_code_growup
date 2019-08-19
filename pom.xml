@@ -21,7 +21,6 @@
         <module>erik-little-util</module>
         <module>erik-lucene</module>
         <module>erik-mockito</module>
-        <module>erik-spring</module>
         <module>ignite-study</module>
         <module>java-socket</module>
         <module>jdbc.study</module>
