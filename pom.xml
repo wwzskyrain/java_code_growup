@@ -33,6 +33,7 @@
         <module>websoket</module>
         <module>xmly-util</module>
         <module>erik-interview</module>
+        <module>spring-xmly-rpc-m3</module>
     </modules>
 
 

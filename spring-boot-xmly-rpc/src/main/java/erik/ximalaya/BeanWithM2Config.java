@@ -177,5 +177,4 @@ public class BeanWithM2Config {
         return new SubAccountViewDtoTranslator();
     }
 
-
 }

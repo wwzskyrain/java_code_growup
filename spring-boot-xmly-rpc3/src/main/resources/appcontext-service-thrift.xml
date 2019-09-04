@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mainstay="http://cms.ximalaya.com/schema/mainstay"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://cms.ximalaya.com/schema/mainstay
+        http://cms.ximalaya.com/schema/mainstay/ximalaya-mainstay-1.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       default-lazy-init="false">
+
+    <util:properties id="mainstay" location="classpath:mainstay.properties"/>
+
+    <mainstay:application id="erikTestApplication" name="business-promotion-groupon-rpc-service" level="2">
+        <mainstay:owner name="frank.li" email="frank.li@ximalaya.com"/>
+        <mainstay:owner name="cathy.tan" email="cathy.tan@ximalaya.com"/>
+    </mainstay:application>
+
+    <mainstay:registry id="registry"
+                       address="#{mainstay['zk.connection']}"
+                       legacy="true"
+                       digest-auth="#{mainstay['zk.digestAuth']}"/>
+
+    <mainstay:protocol id="protocol" codec="thrift"/>
+
+    <!--send app message service -->
+    <mainstay:client id="sendMessageServerV2Client"
+                     group="#{mainstay['send.message.service.thrift.group']}"
+                     application="erikTestApplication"
+                     timeout="#{mainstay['send.message.service.thrift.timeout']}"
+                     protocol="protocol"
+                     registry="registry"
+                     iface-class="com.ximalaya.xchat.msg.v2.thrift.XChatSendMsgService.Iface"/>
+    <bean id="remoteSyncXChatSendMsgService"
+          class="com.ximalaya.xchat.msg.v2.service.impl.ThriftRemoteSyncXChatSendMsgService"/>
+
+    <!-- groupon-->
+    <mainstay:client id="grouponQueryClient"
+                     registry="registry"
+                     group="#{mainstay['business.promotion.groupon.thrift.client.group']}"
+                     application="erikTestApplication"
+                     protocol="protocol"
+                     timeout="#{mainstay['business.promotion.groupon.thrift.client.timeout']}"
+                     iface-class="com.ximalaya.business.promotion.groupon.query.thrift.api.ThriftPromotionGrouponQueryService$Iface"/>
+
+    <bean id="grouponQueryService" class="com.ximalaya.business.promotion.groupon.query.thrift.client.PromotionGrouponQueryServiceClient"/>
+
+    <!-- promotion plan-->
+    <mainstay:client id="promotionPlanQueryClient"
+                     registry="registry"
+                     group="#{mainstay['business.promotion.plan.thrift.client.group']}"
+                     application="erikTestApplication"
+                     protocol="protocol"
+                     timeout="#{mainstay['business.promotion.plan.thrift.client.timeout']}"
+                     iface-class="com.ximalaya.business.promotion.plan.query.thrift.api.ThriftPromotionPlanQueryService$Iface"/>
+
+    <bean id="promotionPlanQueryService"
+          class="com.ximalaya.business.promotion.plan.query.thrift.client.PromotionPlanQueryServiceClient"/>
+
+</beans>
