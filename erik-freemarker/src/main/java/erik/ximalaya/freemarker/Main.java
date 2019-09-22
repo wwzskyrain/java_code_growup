@@ -26,10 +26,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Where X, Y, Z enables the not-100%-backward-compatible fixes introduced in
-        // FreeMarker version X.Y.Z  and earlier (see Configuration(Version)).
-//        cfg.setSomeSetting(...);
-//        cfg.setOtherSetting(...);
 
         // Later, whenever the application needs a template (so you may do this a lot, and from multiple threads):
         Template myTemplate = null;
