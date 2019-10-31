@@ -68,7 +68,12 @@
             <version>3.0.17</version>
         </dependency>
 
+        <!--   xmly rpc    -->
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>business-promotion-coupon-query-api</artifactId>
+            <version>1.2.15</version>
+        </dependency>
     </dependencies>
-
 
 </project>

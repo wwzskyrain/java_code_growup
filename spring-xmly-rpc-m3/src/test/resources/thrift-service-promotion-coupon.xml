@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mainstay="http://cms.ximalaya.com/schema/mainstay"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://cms.ximalaya.com/schema/mainstay
+        http://cms.ximalaya.com/schema/mainstay/ximalaya-mainstay-1.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       default-lazy-init="false">
+
+    <util:properties id="mainstay" location="classpath:mainstay.properties"/>
+
+    <mainstay:application id="erikTestApplication" name="erik-unit-test" level="2">
+        <mainstay:owner name="frank.li" email="frank.li@ximalaya.com"/>
+        <mainstay:owner name="cathy.tan" email="cathy.tan@ximalaya.com"/>
+    </mainstay:application>
+
+    <mainstay:registry id="registry"
+                       address="#{mainstay['zk.connection']}"
+                       legacy="true"
+                       digest-auth="#{mainstay['zk.digestAuth']}"/>
+
+    <mainstay:protocol id="protocol" codec="thrift"/>
+
+    <!-- promotion plan-->
+    <mainstay:client id="promotionCouponClient"
+                     registry="registry"
+                     group="#{mainstay['thrift.business.promotion.coupon.group']}"
+                     application="erikTestApplication"
+                     protocol="protocol"
+                     timeout="#{mainstay['thrift.business.promotion.coupon.timeout']}"
+                     multiplex="false"
+                     iface-class="com.ximalaya.business.promotion.coupon.query.thrift.api.ThriftCouponQueryService.Iface"/>
+
+    <bean id="promotionCouponQueryService"
+          class="com.ximalaya.business.promotion.coupon.query.thrift.client.ThriftCouponQueryServiceClient"/>
+
+
+</beans>

@@ -20,9 +20,9 @@ public class Main {
     public static void main(String[] args) {
 
         // Where the application is initialized; in general you do this ONLY ONCE in the application life-cycle!
-        Configuration configuration = new Configuration(new Version(2,3,21));
+        Configuration configuration = new Configuration(new Version(2, 3, 21));
         try {
-            configuration.setDirectoryForTemplateLoading(new File("/Users/nali/project_erik/java_code_growup/freemarker.demo/src/main/resources"));
+            configuration.setDirectoryForTemplateLoading(new File("/Users/nali/project_erik/java_code_growup/erik-freemarker/src/main/resources"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,18 +30,20 @@ public class Main {
         // Later, whenever the application needs a template (so you may do this a lot, and from multiple threads):
         Template myTemplate = null;
         try {
-            myTemplate = configuration.getTemplate("myTemplate.html");
+            myTemplate = configuration.getTemplate("myTemplate.ftl");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         Writer consoleWriter = new OutputStreamWriter(System.out);
 
-        Map<Object,Object> dataModel = new HashMap<>();
+        Map<Object, Object> dataModel = new HashMap<>();
 
-        List<String> listData =new ArrayList<>();
+        List<String> listData = new ArrayList<>();
 
-        dataModel.put("list",listData);
+        dataModel.put("list", listData);
+        dataModel.put("emptyValue", "");
+        dataModel.put("nullValue", null);
 
 
         try {

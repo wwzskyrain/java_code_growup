@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class AppleProductXiCoinTest {
 
-    private String productIdPrefix = "101600";
-    private String itemIdPrefix = "1016000";
+    private String xiCoinProductIdPrefix = "101600";
+    private String xiCoinItemIdPrefix = "1016000";
     private String propertyIdPrefix = "20160921";
 
     private Long attributeIdAppleProductId = 10010541L;
@@ -60,8 +60,8 @@ public class AppleProductXiCoinTest {
                 continue;
             }
             String spuId = getSpuId(productXiCoin);
-            String productId = getProductId(productIdPrefix, spuId);
-            String itemId = getItemId(itemIdPrefix, spuId);
+            String productId = getProductId(xiCoinProductIdPrefix, spuId);
+            String itemId = getItemId(xiCoinItemIdPrefix, spuId);
             System.out.println(String.format(SQL_PATTERN_INSERT_PRODUCT, productId, spuId, productXiCoin.getDescription(), productXiCoin.getDescription(), productXiCoin.getDescription()));
             System.out.println(String.format(SQL_PATTERN_INSERT_ITEM, itemId, productId, productXiCoin.getPrice()));
 
@@ -87,20 +87,64 @@ public class AppleProductXiCoinTest {
         return "12" + "1" + "00" + StringUtils.leftPad(xiCoin.getPrice(), 6, '0');
     }
 
+    /**
+     * 顶空app的两套喜点充值产品
+     */
+    @Test
+    public void buildSql() {
+        int[] xiAmounts = {6, 18, 30, 45, 60, 118, 188, 268};
+        String businessPlatform = "13";
+        int osType = 2;
+
+        List<String> productInsertSqls = new ArrayList<>();
+        List<String> itemInsertSqls = new ArrayList<>();
+        for (int i = 0; i < xiAmounts.length; i++) {
+
+            String spuId = getSpuId(businessPlatform, String.valueOf(osType), xiAmounts[i]);
+            String productId = getProductId(xiCoinProductIdPrefix, spuId);
+            String itemId = getItemId(xiCoinItemIdPrefix, spuId);
+            String productName = getProductName(osType, xiAmounts[i]);
+            productInsertSqls.add(generatorProductInsertSql(productId, spuId, productName, productName, productName));
+            itemInsertSqls.add(generatorItemInsertSql(itemId, productId, String.valueOf(xiAmounts[i])));
+        }
+        for (String productInsertSql : productInsertSqls) {
+            System.out.println(productInsertSql);
+        }
+        System.out.println("-------------------");
+        for (String itemInsertSql : itemInsertSqls) {
+            System.out.println(itemInsertSql);
+        }
+    }
+
+    public String generatorProductInsertSql(String productId, String spuId, String description, String name, String detail) {
+        return String.format(SQL_PATTERN_INSERT_PRODUCT, productId, spuId, description, name, description, description);
+    }
+
+    public String generatorItemInsertSql(String itemId, String productId, String price) {
+        return String.format(SQL_PATTERN_INSERT_ITEM, itemId, productId, price);
+    }
+
+    public String getProductName(int osType, int xiAmount) {
+        if (osType == 1) {
+            return String.format("苹果充值%d喜点", xiAmount);
+        } else if (osType == 2) {
+            return String.format("安卓充值%d喜点", xiAmount);
+        } else {
+            return String.format("喜点充值%d喜点", xiAmount);
+        }
+    }
+
+    private String getSpuId(String businessPlatform, String osType, int xiCoinAmount) {
+        return businessPlatform + osType + "00" + StringUtils.leftPad(String.valueOf(xiCoinAmount), 6, '0');
+
+    }
+
     private String getProductId(String productIdPrefix, String spuId) {
         return productIdPrefix + spuId;
     }
 
     private String getItemId(String itemIdPrefix, String spuId) {
         return itemIdPrefix + spuId;
-    }
-
-    private List<String> getPropertyIds(String spuId) {
-        List<String> propertyIds = new ArrayList<>();
-        propertyIds.add(propertyIdPrefix + spuId.substring(1) + "1");
-        propertyIds.add(propertyIdPrefix + spuId.substring(1) + "2");
-        propertyIds.add(propertyIdPrefix + spuId.substring(1) + "3");
-        return propertyIds;
     }
 
 

@@ -45,6 +45,22 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Boolean getSex() {
+        return sex;
+    }
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
+
     public static List<Person> getPersons() {
 
         List<Person> personList = new ArrayList<>();

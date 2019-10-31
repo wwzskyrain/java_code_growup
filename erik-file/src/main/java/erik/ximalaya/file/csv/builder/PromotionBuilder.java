@@ -5,9 +5,11 @@ import erik.ximalaya.file.csv.beans.Item;
 import erik.ximalaya.file.csv.beans.Product;
 import erik.ximalaya.file.csv.vo.PromotionItem;
 import erik.ximalaya.file.csv.vo.PromotionRule;
+import javafx.util.Pair;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,19 +18,58 @@ import java.util.Map;
  */
 public class PromotionBuilder {
 
-    String PROMOTION_RULE_INERT_SQL = "INSERT INTO XIMA_PMP.PMP_PROMOTION_RULE (PROMOTION_ID, ACTIVITY_ID, PROMOTION_NAME, PROMOTION_LABEL, PROMOTION_TYPE, DESCRIPTION,DISCOUNT_TYPE, DISCOUNT_RATE, DISCOUNT_AMOUNT, CONTEXT, CREATE_TIME,LAST_UPDATE_TIME, VERSION, HAS_PROMOTION_INVENTORY, HAS_PERSONAL_INVENTORY) VALUES ({PROMOTION_ID}, {ACTIVITY_ID}, {PROMOTION_NAME}, {PROMOTION_LABEL}, {PROMOTION_TYPE}, {DESCRIPTION}, {DISCOUNT_TYPE},{DISCOUNT_RATE}, {DISCOUNT_AMOUNT}, {CONTEXT}, NOW(), NOW(), 1, 0, 1) ON DUPLICATE KEY UPDATE LAST_UPDATE_TIME = NOW(), VERSION = VERSION + 1;";
+    String PROMOTION_RULE_INERT_SQL = "INSERT INTO XIMA_PMP.PMP_PROMOTION_RULE (PROMOTION_ID, ACTIVITY_ID, PROMOTION_NAME, PROMOTION_LABEL, PROMOTION_TYPE, DESCRIPTION,DISCOUNT_TYPE, DISCOUNT_RATE, DISCOUNT_AMOUNT, CONTEXT, CREATE_TIME,LAST_UPDATE_TIME, VERSION, HAS_PROMOTION_INVENTORY, HAS_PERSONAL_INVENTORY) VALUES ({PROMOTION_ID}, {ACTIVITY_ID}, {PROMOTION_NAME}, {PROMOTION_LABEL}, {PROMOTION_TYPE}, {DESCRIPTION}, {DISCOUNT_TYPE},{DISCOUNT_RATE}, {DISCOUNT_AMOUNT}, {CONTEXT}, NOW(), NOW(), 1, 0, 0) ON DUPLICATE KEY UPDATE LAST_UPDATE_TIME = NOW(), VERSION = VERSION + 1, HAS_PROMOTION_INVENTORY = 0, HAS_PERSONAL_INVENTORY = 0;";
     String PROMOTION_ITEM_INSERT_SQL = "INSERT INTO XIMA_PMP.PMP_PROMOTION_ITEM (PROMOTION_ID, ITEM_ID, PROMOTION_PRICE, CREATE_TIME, LAST_UPDATE_TIME) VALUES ({PROMOTION_ID}, {ITEM_ID}, {PROMOTION_PRICE}, now(), now()) ON DUPLICATE KEY UPDATE LAST_UPDATE_TIME = NOW();";
     Integer basePromotionId = 101000;
 
-    public PromotionItem buildPromotionItem(Item parentItem, Item childItem, PromotionRule promotionRule) {
+
+    public PromotionItem buildPromotionItem(Item parentItem, Item childItem, String promotionId) {
         PromotionItem promotionItem = new PromotionItem();
         promotionItem.itemId = childItem.getItemId();
-        promotionItem.promotionId = promotionRule.promotionId;
+        promotionItem.promotionId = promotionId;
         promotionItem.promotionPrice = new BigDecimal(childItem.getUnitPrice())
                 .multiply(new BigDecimal(parentItem.getDiscountRate()))
                 .setScale(2, BigDecimal.ROUND_HALF_UP)
                 .toPlainString();
         return promotionItem;
+    }
+
+
+    public PromotionItem buildPromotionItem(Item compositeItem, Pair<Item, Item> itemPair, String promotionId) {
+        PromotionItem promotionItem = new PromotionItem();
+
+        promotionItem.itemId = itemPair.getKey().getItemId();
+        promotionItem.promotionId = promotionId;
+        promotionItem.promotionPrice = new BigDecimal(itemPair.getValue().getUnitPrice())
+                .multiply(new BigDecimal(compositeItem.getDiscountRate()))
+                .setScale(2, BigDecimal.ROUND_HALF_UP)
+                .toPlainString();
+        return promotionItem;
+    }
+
+
+    public PromotionRule buildPromotionRule(String activityId, String promotionId, Product product, Item compositeItem, List<PromotionItem> promotionItems) {
+
+        PromotionRule promotionRule = new PromotionRule();
+
+        promotionRule.promotionId = promotionId;
+        promotionRule.activityId = activityId;  // 线上:212229
+        Map<String, Object> context = new HashMap<>();
+        context.put("compositeItemId", compositeItem.getItemId());
+        promotionRule.context = JSON.toJSONString(context);
+        promotionRule.description = product.getDescription();
+        promotionRule.discountType = "1";
+        BigDecimal unitPrice = BigDecimal.ZERO;
+        for (PromotionItem promotionItem : promotionItems) {
+            unitPrice = unitPrice.add(new BigDecimal(promotionItem.promotionPrice));
+        }
+        promotionRule.discountAmount = unitPrice.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
+        promotionRule.discountRate = "";
+        promotionRule.label = "";
+        promotionRule.name = product.getName();
+        promotionRule.type = "1";
+
+        return promotionRule;
     }
 
     public PromotionRule buildPromotionRule(Product product, Item item) {
@@ -38,8 +79,8 @@ public class PromotionBuilder {
         String coverUrlPrefix = "http://fdfs.xmcdn.com";
 
         promotionRule.promotionId = (basePromotionId++).toString();
-        promotionRule.activityId = "10101142";  //test:10101142
-//        promotionRule.activityId = "212229";
+//        promotionRule.activityId = "10101142";  //test:10101142
+        promotionRule.activityId = "212229";  // 线上:212229
         Map<String, Object> context = new HashMap<>();
         context.put("coverUrl", coverUrlPrefix + product.getCoverUrl());
         context.put("compositeItemId", item.getItemId());

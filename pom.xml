@@ -28,7 +28,6 @@
         <module>redis-demo</module>
         <module>spring.kafka</module>
         <module>springMVCDemo</module>
-        <module>test.usage</module>
         <module>think.in.java</module>
         <module>websoket</module>
         <module>xmly-util</module>

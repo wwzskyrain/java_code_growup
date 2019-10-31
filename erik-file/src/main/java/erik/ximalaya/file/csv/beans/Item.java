@@ -21,6 +21,9 @@ public class Item {
     @CsvBindByName(column = "UNIT_PRICE")
     private String unitPrice;
 
+    @CsvBindByName(column = "SCOPE_ID")
+    private String scope;
+
     public String getItemId() {
         return itemId;
     }
@@ -51,5 +54,13 @@ public class Item {
 
     public void setUnitPrice(String unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public int getScope() {
+        return Integer.valueOf(scope);
     }
 }

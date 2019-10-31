@@ -25,6 +25,10 @@ public class AppleProductXiCoin implements Serializable {
     @CsvBindByName(column = "status")
     private String status;
 
+    private String spuId;
+    private String productId;
+    private String itemId;
+
     public AppleProductXiCoin() {
     }
 
@@ -65,5 +69,29 @@ public class AppleProductXiCoin implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getSpuId() {
+        return spuId;
+    }
+
+    public void setSpuId(String spuId) {
+        this.spuId = spuId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 }
