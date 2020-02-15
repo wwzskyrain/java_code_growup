@@ -45,7 +45,7 @@ public class Person implements Externalizable {
 
 
     public static void main(String[] args) {
-
+        System.out.println("Hello");
     }
 
     

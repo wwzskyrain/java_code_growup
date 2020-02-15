@@ -35,6 +35,7 @@
         <module>spring-xmly-rpc-m3</module>
         <module>spring-xmly-rpc-m2</module>
         <module>java-swing-sudo</module>
+        <module>erik-sentinal</module>
     </modules>
 
 

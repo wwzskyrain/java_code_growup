@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mainstay="http://cms.ximalaya.com/schema/mainstay"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://cms.ximalaya.com/schema/mainstay
+		http://cms.ximalaya.com/schema/mainstay/ximalaya-mainstay-1.0.xsd"
+       default-lazy-init="false">
+
+    <util:properties id="mainstay" location="classpath:mainstay.properties"/>
+
+    <bean id="mainstayConfig" class="com.ximalaya.mainstay.spring.config.MainstayConfig">
+        <property name="zkConnectString" value="#{mainstay['zk.connection']}"></property>
+        <property name="webConsoleUrl" value="#{mainstay['zk.console.url']}"></property>
+        <property name="zkSessionTimeoutMills" value="#{mainstay['zk.session.timeout']}"></property>
+        <property name="zkConnectionTimeoutMills" value="#{mainstay['zk.connect.timeout']}"></property>
+        <property name="zkDigestAuth" value="#{mainstay['zk.digestAuth'] ?: ''} "></property>
+    </bean>
+
+
+
+
+    <bean id="mainstayPoolConfig" class="com.ximalaya.mainstay.spring.config.ConnectionPoolConfig">
+        <property name="maxTotal" value="#{mainstay['thrift.service.pool.maxTotal']}"/>
+        <property name="minIdle" value="#{mainstay['thrift.service.pool.minIdle']}"/>
+        <property name="maxIdle" value="#{mainstay['thrift.service.pool.maxIdle']}"/>
+        <property name="maxWaitMillis" value="#{mainstay['thrift.service.pool.maxWaitMillis']}"/>
+        <property name="testWhileIdle" value="#{mainstay['thrift.service.pool.testWhileIdle']}"/>
+        <property name="timeBetweenEvictionRunsMillis"
+                  value="#{mainstay['thrift.service.pool.timeBetweenEvictionRunsMillis']}"/>
+        <property name="numTestsPerEvictionRun"
+                  value="#{mainstay['thrift.service.pool.numTestsPerEvictionRun']}"/>
+        <property name="minEvictableIdleTimeMillis"
+                  value="#{mainstay['thrift.service.pool.minEvictableIdleTimeMillis']}"/>
+        <property name="softMinEvictableIdleTimeMillis"
+                  value="#{mainstay['thrift.service.pool.softMinEvictableIdleTimeMillis']}"/>
+    </bean>
+
+
+    <bean id="promotionCouponClientConfig" class="com.ximalaya.mainstay.spring.config.ClientConfig">
+        <property name="group" value="#{mainstay['business.promotion.coupon.service.group']}"/>
+        <property name="routingType" value="#{mainstay['business.promotion.coupon.service.routingType']}"/>
+        <property name="isMultiplex" value="#{mainstay['business.promotion.coupon.service.isMultiplex']}"/>
+        <property name="timeout" value="#{mainstay['business.promotion.coupon.service.timeout']}"/>
+    </bean>
+
+    <bean id="promotionCouponClient" class="com.ximalaya.mainstay.spring.thrift.MainstayClient">
+        <property name="ifaceClass" value="com.ximalaya.business.promotion.coupon.command.thrift.api.ThriftPromotionCouponCommandService.Iface"/>
+        <property name="mainstayConfig" ref="mainstayConfig"/>
+        <property name="poolConfig" ref="mainstayPoolConfig"/>
+        <property name="clientConfig" ref="promotionCouponClientConfig"/>
+    </bean>
+
+    <bean id="promotionCoupon" class="com.ximalaya.business.promotion.coupon.command.thrift.client.ThriftCouponCommandServiceClient"/>
+
+</beans>

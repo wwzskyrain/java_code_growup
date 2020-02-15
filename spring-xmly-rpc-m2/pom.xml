@@ -16,6 +16,8 @@
     <properties>
         <spring.version>4.1.7.RELEASE</spring.version>
         <business.promotion.plan.version>1.1.16</business.promotion.plan.version>
+        <business.promotion.coupon.version>1.2.18-M2</business.promotion.coupon.version>
+        <mainstay.version>2.1.23</mainstay.version>
     </properties>
 
     <dependencies>
@@ -42,6 +44,18 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.ximalaya.business</groupId>
+            <artifactId>business-promotion-coupon-command-api</artifactId>
+            <version>${business.promotion.coupon.version}</version>
+        </dependency>
+
+        <!--    mainstay spring    -->
+        <dependency>
+            <groupId>com.ximalaya.mainstay</groupId>
+            <artifactId>mainstay-spring</artifactId>
+            <version>${mainstay.version}</version>
+        </dependency>
 
 
     </dependencies>
