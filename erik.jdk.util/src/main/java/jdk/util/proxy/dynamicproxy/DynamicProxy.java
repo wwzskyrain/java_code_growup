@@ -7,6 +7,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+/**
+ * @author erik.wang
+ */
 public class DynamicProxy implements InvocationHandler {
 
     private Object target;
@@ -16,7 +19,7 @@ public class DynamicProxy implements InvocationHandler {
     }
 
     /**
-     * @param proxy 代理对象，不是代理逻辑体，即不是this
+     * @param proxy  代理对象，不是代理逻辑体，即不是this
      * @param method 当前被调用的方法
      * @param args
      * @return
@@ -31,6 +34,8 @@ public class DynamicProxy implements InvocationHandler {
         System.out.printf("proxy-> method name:%s with declaringClass:%s\n", method.getName(), declaringClass);
 
 //        System.out.println("proxy:" + proxy);     //不注释掉该句，就会陷入死循环。
+
+        System.out.println("proxy.hashCode():" + proxy.hashCode());
 
         Object result = method.invoke(target, args);
         //invoke为什么需要一个target的参数呢？
@@ -47,8 +52,8 @@ public class DynamicProxy implements InvocationHandler {
     }
 
     /**
-     * 1.动态代理只能代理实现了接口的类，而且只能代理其接口中的方法
-     * 2.DynamicProxy只是不是一个代理容器，而是代理逻辑体。
+     * 1.动态代理只能代理实现了接口的类，而且只能代理其接口中的方法。不准确，还代理了Object的那五个方法，哈哈哈
+     * 2.DynamicProxy不是一个代理容器，而是代理逻辑体。
      * 3.originalHuman是"源对象"，即"被代理对象"；
      * 4.dynamicProxy是"代理逻辑"
      * 5.通过Proxy.newProxyInstance生成的是"代理对象"；

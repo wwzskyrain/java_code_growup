@@ -24,7 +24,6 @@
         <module>ignite-study</module>
         <module>java-socket</module>
         <module>jdbc.study</module>
-        <module>mocktest</module>
         <module>redis-demo</module>
         <module>spring.kafka</module>
         <module>springMVCDemo</module>
@@ -36,6 +35,7 @@
         <module>spring-xmly-rpc-m2</module>
         <module>java-swing-sudo</module>
         <module>erik-sentinal</module>
+        <module>third-party-all</module>
     </modules>
 
 

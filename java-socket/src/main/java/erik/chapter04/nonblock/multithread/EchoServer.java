@@ -8,7 +8,7 @@ import java.net.*;
 import java.util.*;
 
 public class EchoServer {
-//  主线程 - accepted线程
+    //  主线程 - accepted线程
 //  主线程用来读写，accepted线程用来接受链接；
     private Selector selector = null;
     private ServerSocketChannel serverSocketChannel = null;
