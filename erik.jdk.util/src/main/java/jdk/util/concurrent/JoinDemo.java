@@ -20,6 +20,7 @@ public class JoinDemo {
         System.out.println("after join, before myThread start.");
         TimeUnit.SECONDS.sleep(2);
         myThread.start();
+        System.out.println("over");
 
     }
 

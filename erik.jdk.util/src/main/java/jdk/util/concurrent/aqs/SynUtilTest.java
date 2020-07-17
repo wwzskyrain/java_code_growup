@@ -1,4 +1,4 @@
-package jdk.util.concurrent.util;
+package jdk.util.concurrent.aqs;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author erik.wang
  * @date 2019/05/10
  **/
-public class SynUtil {
+public class SynUtilTest {
 
 
     @Test
@@ -21,7 +21,7 @@ public class SynUtil {
 
         ExecutorService executorService = Executors.newCachedThreadPool();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             executorService.submit(() -> {
                 try {
                     System.out.printf("thread %s wait at latch\n", Thread.currentThread().getName());

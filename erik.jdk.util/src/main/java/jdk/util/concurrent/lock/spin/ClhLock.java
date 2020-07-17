@@ -27,14 +27,32 @@ public class ClhLock {
     }
 
     public void unlock(CLHNode currentThread) {
+
         // 如果队列里只有当前线程，则释放对当前线程的引用（for GC）。
         if (!UPDATER.compareAndSet(this, currentThread, null)) {
             // 还有后续线程
-            currentThread.isLocked = false;// 改变状态，让后续线程结束自旋
+            // 改变状态，让后续线程结束自旋
+            currentThread.isLocked = false;
+        } else {
+            currentThread = null;
         }
     }
 
     public static void main(String[] args) {
+
+        ClhLock lock = new ClhLock();
+
+        CLHNode clhNode = new CLHNode();
+
+        try {
+            lock.lock(clhNode);
+            // TODO: 2020-07-08
+
+
+        } finally {
+            lock.unlock(clhNode);
+        }
+
 
     }
 
