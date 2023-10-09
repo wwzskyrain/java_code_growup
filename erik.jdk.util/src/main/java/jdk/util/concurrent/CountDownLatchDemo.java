@@ -52,6 +52,7 @@ public class CountDownLatchDemo {
 
         public void run() {
             try {
+                //等着喊开始
                 startSignal.await();
                 doWork();
                 doneSignal.countDown();

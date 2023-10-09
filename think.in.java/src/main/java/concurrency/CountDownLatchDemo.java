@@ -19,6 +19,7 @@ class TaskPortion implements Runnable {
     public void run() {
         try {
             doWork();
+            //调用够x个次之后，哪些await()的线程才能执行下去。
             latch.countDown();
         } catch (InterruptedException ex) {
             // Acceptable way to exit

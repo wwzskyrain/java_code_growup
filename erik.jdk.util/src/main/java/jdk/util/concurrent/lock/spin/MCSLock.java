@@ -36,7 +36,7 @@ public class MCSLock {
 
             while (currentThreadNode.isBlock) {// step 3 : 自旋处
             }
-        } else { // 只有一个线程在使用锁，没有前驱来通知它，所以得自己标记自己为非阻塞
+        } else { // 只有一个线程在使用锁，没有前驱来通知它，所以得自己标记自己为非阻塞，也就是持有锁了。
             currentThreadNode.isBlock = false;
         }
         logger.info("some guy acquire lock.");

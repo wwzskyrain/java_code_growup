@@ -21,7 +21,6 @@ public class SpinLock {
 
     public void lock() {
         Thread currentThread = Thread.currentThread();
-
         // 如果锁未被占用，则设置当前线程为锁的拥有者
         while (!owner.compareAndSet(null, currentThread)) {
         }

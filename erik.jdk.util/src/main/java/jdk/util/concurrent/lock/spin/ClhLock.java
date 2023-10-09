@@ -4,12 +4,13 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 
 /**
- * @author 1.链式的；每一个Node被一个线程持有；每一个线程持有的node是它的前驱线程的。
+ * @author
+ * 1.链式的；每一个Node被一个线程持有；每一个线程持有的node是它的前驱线程的。
  * 2.持有者一直在循环等待着前驱node从lock状态变成unlock状态，然后立刻跳出循环，从而获得锁。
  */
 public class ClhLock {
     public static class CLHNode {
-        private volatile boolean isLocked = true; // 默认是在等待锁
+        private volatile boolean isLocked = true; // 默认是锁住的状态
     }
 
     @SuppressWarnings("unused")
