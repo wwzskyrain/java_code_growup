@@ -15,7 +15,6 @@
         <module>erik.java8</module>
         <module>erik.jdk.util</module>
         <module>erik.velocity</module>
-        <module>erik-file</module>
         <module>erik-hystix</module>
         <module>erik-junit</module>
         <module>erik-little-util</module>
@@ -26,18 +25,19 @@
         <module>jdbc.study</module>
         <module>redis-demo</module>
         <module>spring.kafka</module>
-        <module>springMVCDemo</module>
         <module>think.in.java</module>
         <module>websoket</module>
         <module>xmly-util</module>
         <module>erik-interview</module>
-        <module>spring-xmly-rpc-m3</module>
-        <module>spring-xmly-rpc-m2</module>
         <module>java-swing-sudo</module>
         <module>erik-sentinal</module>
         <module>third-party-all</module>
     </modules>
 
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
 
     <dependencies>
 
@@ -57,8 +57,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
         </plugins>

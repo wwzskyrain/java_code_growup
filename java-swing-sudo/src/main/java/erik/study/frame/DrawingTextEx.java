@@ -1,6 +1,7 @@
 package erik.study.frame;
 
-import sun.awt.CGraphicsEnvironment;
+
+import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,7 +27,7 @@ class DrawTextPanel extends JPanel {
 
         g2d.drawString("55555555", 20, 30);
         g2d.setFont(new Font("TimesNewRomanPS-BoldMT", Font.PLAIN, 40));
-        g2d.drawString("time", 40,70);
+        g2d.drawString("time", 40, 70);
     }
 
     @Override
@@ -62,10 +63,5 @@ public class DrawingTextEx extends JFrame {
             DrawingTextEx ex = new DrawingTextEx();
             ex.setVisible(true);
         });
-
-        CGraphicsEnvironment cGraphicsEnvironment = new CGraphicsEnvironment();
-        for (Font font : cGraphicsEnvironment.getAllFonts()) {
-            System.out.println(font);
-        }
     }
 }
